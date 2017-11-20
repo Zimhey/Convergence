@@ -6,7 +6,7 @@ public abstract class Movement : MonoBehaviour
 {
 
     public float moveTime = 0.1f;
-    LayerMask BlockingLayer;
+    public LayerMask BlockingLayer;
 
     public BoxCollider2D boxCollider;
     public Rigidbody2D rb2D;
@@ -24,6 +24,8 @@ public abstract class Movement : MonoBehaviour
 
         //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
         inverseMoveTime = 1f / moveTime;
+
+        
     }
 
     protected virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -39,6 +41,7 @@ public abstract class Movement : MonoBehaviour
 
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
+        
 
         //Re-enable boxCollider after linecast
         boxCollider.enabled = true;
