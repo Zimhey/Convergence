@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
+ 	Start,
+ 	Goal,
     Ground,
     Pit,
     Wall,
@@ -16,7 +18,15 @@ using UnityEngine;
 public enum TileTypes
 {
     Ground,
-    Wall
+	Pit,
+    Wall,
+	Teleport,
+	Gate,
+	Switch,
+	Slide,
+	Ice,
+	Start,
+	Goal
 }
 
 public class BoardManager : MonoBehaviour
@@ -29,6 +39,14 @@ public class BoardManager : MonoBehaviour
     public GameObject BoardObject;
     public GameObject[] GroundTiles;
     public GameObject[] WallTiles;
+	public GameObject[] IceTiles;
+	public GameObject[] TeleportTiles;
+	public GameObject[] GateTiles;
+	public GameObject[] SwitchTiles;
+	public GameObject[] PitTiles;
+	public GameObject[] StartTiles;
+	public GameObject[] GoalTiles;
+
     public GameObject ErrorTile;
 
     private void Resize()
@@ -63,8 +81,22 @@ public class BoardManager : MonoBehaviour
                 return GroundTiles[Random.Range(0, GroundTiles.Length)];
             case TileTypes.Wall:
                 return WallTiles[Random.Range(0, WallTiles.Length)];
-            default:
-                return ErrorTile;
+			case TileTypes.Ice:
+				return IceTiles[Random.Range(0, IceTiles.Length)];
+			case TileTypes.Pit:
+				return PitTiles[Random.Range(0, PitTiles.Length)];
+			case TileTypes.Teleport:
+				return TeleportTiles[Random.Range(0, TeleportTiles.Length)];
+			case TileTypes.Gate:
+				return GateTiles[Random.Range(0, GateTiles.Length)];
+			case TileTypes.Switch:
+				return SwitchTiles[Random.Range(0, SwitchTiles.Length)];
+			case TileTypes.Start:
+				return StartTiles[Random.Range(0, StartTiles.Length)];
+			case TileTypes.Goal:
+				return GoalTiles[Random.RandomRange(0, GoalTiles.Length)];
+			default:
+		        return ErrorTile;
         }
     }
 
@@ -91,7 +123,21 @@ public class BoardManager : MonoBehaviour
             case TileTypes.Ground:
                 return TileTypes.Wall;
             case TileTypes.Wall:
-                return TileTypes.Ground;
+                return TileTypes.Ice;
+			case TileTypes.Ice:
+				return TileTypes.Pit;
+			case TileTypes.Pit:
+				return TileTypes.Teleport;
+			case TileTypes.Teleport:
+				return TileTypes.Gate;
+			case TileTypes.Gate:
+				return TileTypes.Switch;
+			case TileTypes.Switch:
+				return TileTypes.Start;
+			case TileTypes.Start:
+				return TileTypes.Goal;
+			case TileTypes.Goal:
+				return TileTypes.Ground;
             default:
                 return TileTypes.Ground;
         }
