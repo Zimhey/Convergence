@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -14,7 +15,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public BoardManager Board;
-    public GameState state;
+    private GameState state;
     public GameState State
     {
         get
@@ -34,6 +35,19 @@ public class GameManager : MonoBehaviour
             state = value;
         }
     }
+
+    private bool levelListInitialized = false;
+    private Dictionary<string, string> levelList;
+    public Dictionary<string, string> LevelList
+    {
+        get
+        {
+            if (!levelListInitialized)
+                initLevelList();
+            return levelList;
+        }
+    }
+
 
     //public List<SingleMovePlayer> characters;
 
@@ -61,6 +75,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadLevel(string level)
+    {
+        State = GameState.Loading;
+        SceneManager.LoadScene(LevelList[level]);
+        State = GameState.WaitForInput;
+    }
+
+
     private void OnGamePause()
     {
         //https://answers.unity.com/questions/904429/pause-and-resume-coroutine-1.html
@@ -71,11 +93,21 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public string GetLevel(int index)
+    {
+        return GetLevelList()[index];
+    }
+
     public List<string> GetLevelList()
     {
-        List<string> list = new List<string>();
-        list.Add("Test");
-        list.Add("Ohhhh weow");
-        return list;
+        return new List<string>(LevelList.Keys);
+    }
+
+    private void initLevelList()
+    {
+        levelList = new Dictionary<string, string>();
+        levelList.Add("Example Scene", "Scenes/Levels/ExampleScene");
+        // TODO add more levels
+        levelListInitialized = true;
     }
 }

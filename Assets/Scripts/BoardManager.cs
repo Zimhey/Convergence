@@ -107,7 +107,6 @@ public class BoardManager : MonoBehaviour
 
     public void ClickedMapPoint(Vector2 point)
     {
-        // TODO translate into array indices
         int x = Mathf.RoundToInt(point.x);
         int y = Mathf.RoundToInt(point.y);
         Debug.Log("Clicked: " + x + " " + y);

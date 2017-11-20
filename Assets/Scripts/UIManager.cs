@@ -27,16 +27,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void setPanel(UserInterfaceScreens target, bool active)
-    {
-        if (target == UserInterfaceScreens.MainMenu)
-            MainMenuPanel.SetActive(active);
-        else if (target == UserInterfaceScreens.LevelSelect)
-            LevelSelectPanel.SetActive(active);
-        else if (target == UserInterfaceScreens.Pause)
-            PausePanel.SetActive(active);
-    }
-
     public GameObject MainMenuPanel;
     public GameObject LevelSelectPanel;
     public GameObject LevelDropDown;
@@ -76,7 +66,7 @@ public class UIManager : MonoBehaviour
     }
     public void PlayClicked()
     {
-        
+        GM.LoadLevel(GM.GetLevel(levelIndex));
     }
 
     public void ShowPause()
@@ -101,5 +91,15 @@ public class UIManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    private void setPanel(UserInterfaceScreens target, bool active)
+    {
+        if (target == UserInterfaceScreens.MainMenu)
+            MainMenuPanel.SetActive(active);
+        else if (target == UserInterfaceScreens.LevelSelect)
+            LevelSelectPanel.SetActive(active);
+        else if (target == UserInterfaceScreens.Pause)
+            PausePanel.SetActive(active);
     }
 }
