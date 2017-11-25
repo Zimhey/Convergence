@@ -86,7 +86,7 @@ public abstract class Movement : MonoBehaviour
         moving = false;
     }
 
-    protected virtual void AttemptMove(int xDir, int yDir)
+    public virtual void AttemptMove(int xDir, int yDir)
     {
         //Hit will store whatever our linecast hits when Move is called.
         RaycastHit2D hit;
@@ -99,12 +99,29 @@ public abstract class Movement : MonoBehaviour
         if (hit.transform == null)
             //If nothing was hit, return and don't execute further code.
             return;
+		/*
+		if (hit.collider){
+			OnTriggerEnter2D (hit.collider, xDir, yDir);
+		}
+		*/
 
         if (!canMove)
         {
             OnCantMove();
         }
     }
+
+	/*
+	private void OnTriggerEnter2D (Collider2D other, int xDir, int yDir)
+	{
+		//Check if the tag of the trigger collided with is Exit.
+		if(other.tag == "Ice")
+		{
+			AttemptMove (xDir, yDir);
+		}
+	}
+	*/
+
 
     protected abstract void OnCantMove();
 

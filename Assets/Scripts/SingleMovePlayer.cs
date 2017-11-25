@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class SingleMovePlayer : Movement {
 
-    
+	//two variables to store the last inputed direction of the player
+	int lastHoriz = 0;
+	int lastVert = 0;
+
+	//Returns last inputted x direction, will be zero if player inputted up or down
+	public int getLastHoriz() 
+	{
+		return lastHoriz;
+	}
+
+	//Returns last inputted y direction, will be zero if player inputted left or right
+	public int getLastVert()
+	{
+		return lastVert;
+	}
 
     private void Update()
     {
         //If it's not the player's turn, exit the function.
         //if (!GameManager.instance.playersTurn) return;
-
-        int horizontal = 0;     //Used to store the horizontal move direction.
-        int vertical = 0;
+		//Used to store the horizontal move direction.
+		int horizontal = 0;
+		//Used to store the vertical move direction.
+		int vertical = 0;
 
         //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
         horizontal = (int)(Input.GetAxisRaw("Horizontal"));
@@ -35,9 +50,16 @@ public class SingleMovePlayer : Movement {
         }
     }
 
-    protected override void AttemptMove(int xDir, int yDir)
+    public override void AttemptMove(int xDir, int yDir)
     {
         RaycastHit2D hit;
+
+		//as long as there is player input for direction, store it
+		if (xDir == 0 && yDir == 0) {
+		} else {
+			lastHoriz = xDir;
+			lastVert = yDir;
+		}
 
         base.AttemptMove(xDir, yDir);
 
