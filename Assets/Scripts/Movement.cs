@@ -96,32 +96,21 @@ public abstract class Movement : MonoBehaviour
         bool canMove = Move(xDir, yDir, out hit);
 
         //Check if nothing was hit by linecast
-        if (hit.transform == null)
-            //If nothing was hit, return and don't execute further code.
-            return;
-		/*
+		if (hit.transform == null) { 
+			//If nothing was hit, return and don't execute further code.
+			return;
+			/*
 		if (hit.collider){
 			OnTriggerEnter2D (hit.collider, xDir, yDir);
 		}
 		*/
+		}
 
         if (!canMove)
         {
             OnCantMove();
         }
     }
-
-	/*
-	private void OnTriggerEnter2D (Collider2D other, int xDir, int yDir)
-	{
-		//Check if the tag of the trigger collided with is Exit.
-		if(other.tag == "Ice")
-		{
-			AttemptMove (xDir, yDir);
-		}
-	}
-	*/
-
 
     protected abstract void OnCantMove();
 

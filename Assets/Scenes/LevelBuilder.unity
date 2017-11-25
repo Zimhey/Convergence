@@ -171,68 +171,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcdb7c419affecb4f8641ec98216a685, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &892624379
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 892624381}
-  - component: {fileID: 892624380}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &892624380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 892624379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20781c96b438bdc46a0c015ea800ffc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rows: 10
-  Columns: 10
-  BoardObject: {fileID: 0}
-  GroundTiles:
-  - {fileID: 1589541006896770, guid: 7f12f21b659a7d94cb29496c0918b20e, type: 2}
-  WallTiles:
-  - {fileID: 1239687473312066, guid: 2564383ef8d066b4480f50b552e0d8de, type: 2}
-  IceTiles:
-  - {fileID: 1952665415625478, guid: 05e34a6b663c04f49b2edef765aa66ee, type: 2}
-  TeleportTiles:
-  - {fileID: 1490590378554634, guid: 41386383825fe4b4ba103c26348a4440, type: 2}
-  GateTiles:
-  - {fileID: 1086905685740732, guid: f404fb77222bdfc47bdfd8d15a15e78f, type: 2}
-  SwitchTiles:
-  - {fileID: 1336726304873410, guid: 96263ec2563d0c9489c58992a847ef8b, type: 2}
-  PitTiles:
-  - {fileID: 1500469662035334, guid: 49d4ccc6bc21030499d35b9958b308de, type: 2}
-  StartTiles:
-  - {fileID: 1262428803955204, guid: 4c0fdd87ece77c54f914af11e0430cf8, type: 2}
-  GoalTiles:
-  - {fileID: 1499553719346330, guid: 6999a071ae0c3f444a186d90d116610b, type: 2}
-  ErrorTile: {fileID: 0}
---- !u!4 &892624381
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 892624379}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1758610711
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,3 +250,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2143104557
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707094130985660, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 55d63eeca4d66e340b5cd919aa3e726f, type: 2}
+  m_IsPrefabParent: 0
