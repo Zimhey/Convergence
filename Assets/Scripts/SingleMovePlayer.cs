@@ -55,8 +55,7 @@ public class SingleMovePlayer : Movement {
         RaycastHit2D hit;
 
 		//as long as there is player input for direction, store it
-		if (xDir == 0 && yDir == 0) {
-		} else {
+		if (xDir != 0 || yDir != 0) {
 			lastHoriz = xDir;
 			lastVert = yDir;
 		}
