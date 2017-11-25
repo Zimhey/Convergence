@@ -52,7 +52,6 @@ public class SingleMovePlayer : Movement {
 
     public override void AttemptMove(int xDir, int yDir)
     {
-        RaycastHit2D hit;
 
 		//as long as there is player input for direction, store it
 		if (xDir != 0 || yDir != 0) {

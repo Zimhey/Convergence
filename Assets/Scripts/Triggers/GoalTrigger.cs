@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GoalTrigger : MonoBehaviour {
@@ -33,48 +34,44 @@ public class GoalTrigger : MonoBehaviour {
 			if (numChars == 4) {
 				if (!Char1Entered && !Char2Entered && !Char3Entered && !Char4Entered) {
 					Char1Entered = true;
-					Destroy (other);
+					Destroy (other.gameObject);
 					entered = false;
 				} else if (Char1Entered && !Char2Entered && !Char3Entered && !Char4Entered) {
 					Char2Entered = true;
-					Destroy (other);
+					Destroy (other.gameObject);
 					entered = false;
 				} else if (Char1Entered && Char2Entered && !Char3Entered && !Char4Entered) {
 					Char3Entered = true;
-					Destroy (other);
+					Destroy (other.gameObject);
 					entered = false;
 				} else if (Char1Entered && Char2Entered && Char3Entered && !Char4Entered) {
 					Char4Entered = true;
-					Destroy (other);
-					Application.LoadLevel ("LevelBuilder-Backup");
+					SceneManager.LoadScene ("LevelBuilder-Backup");
 				}
 			} else if (numChars == 3) {
 				if (!Char1Entered && !Char2Entered && !Char3Entered) {
 					Char1Entered = true;
-					Destroy (other);
+					Destroy (other.gameObject);
 					entered = false;
 				} else if (Char1Entered && !Char2Entered && !Char3Entered) {
 					Char2Entered = true;
-					Destroy (other);
+					Destroy (other.gameObject);
 					entered = false;
 				} else if (Char1Entered && Char2Entered && !Char3Entered) {
 					Char3Entered = true;
-					Destroy (other);
-					Application.LoadLevel ("LevelBuilder-Backup");
+					SceneManager.LoadScene ("LevelBuilder-Backup");
 				}
 			} else if (numChars == 2) {
 				if (!Char1Entered && !Char2Entered) {
 					Char1Entered = true;
-					Destroy (other);
+					Destroy (other.gameObject);
 					entered = false;
 				} else if (Char1Entered && !Char2Entered) {
 					Char2Entered = true;
-					Destroy (other);
-					Application.LoadLevel ("LevelBuilder-Backup");
+					SceneManager.LoadScene ("LevelBuilder-Backup");
 				}
 			} else {
-				Destroy (other);
-				Application.LoadLevel ("LevelBuilder-Backup");
+				SceneManager.LoadScene ("LevelBuilder-Backup");
 			}
 		}
 	}

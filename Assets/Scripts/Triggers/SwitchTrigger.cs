@@ -22,9 +22,6 @@ public class SwitchTrigger : MonoBehaviour {
 			//stores current gate tile objects
 			GateTiles = GameObject.FindGameObjectsWithTag ("Gate");
 
-			Sprite[] sprites = Resources.LoadAll<Sprite> ("Gate");
-
-
 			//For each gate tile, either change it's layer to Default (0, no collisions) or Blocking layer (8, collisions)
 			foreach (GameObject Gate in GateTiles) {
 				SpriteRenderer sr = Gate.GetComponent<SpriteRenderer> ();
