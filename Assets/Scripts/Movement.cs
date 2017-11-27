@@ -28,7 +28,7 @@ public abstract class Movement : MonoBehaviour
         
     }
 
-    protected virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
+    public virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
         //Store start position to move from, based on objects current transform position.
         Vector2 start = transform.position;
@@ -62,7 +62,7 @@ public abstract class Movement : MonoBehaviour
     }
 
 
-    private IEnumerator SmoothMovement(Vector3 end)
+    public IEnumerator SmoothMovement(Vector3 end)
     {
         //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
         //Square magnitude is used instead of magnitude because it's computationally cheaper.
