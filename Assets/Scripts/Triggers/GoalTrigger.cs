@@ -14,7 +14,9 @@ public class GoalTrigger : MonoBehaviour {
 	bool Char3Entered = false;
 	bool Char4Entered = false;
 
+	//Flag to make sure the trigger code only fires once
 	bool entered = false;
+	//Flag to make sure that the starting number of characters in the level is only counted once
 	bool total = false;
 
 	int numChars;
