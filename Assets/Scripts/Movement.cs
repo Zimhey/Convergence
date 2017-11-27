@@ -37,14 +37,14 @@ public abstract class Movement : MonoBehaviour
         Vector2 end = start + new Vector2(xDir, yDir);
 
         //Disable the boxCollider so that linecast doesn't hit this object's own collider.
-        boxCollider.enabled = false;
+        //boxCollider.enabled = false;
 
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
         
 
         //Re-enable boxCollider after linecast
-        boxCollider.enabled = true;
+       // boxCollider.enabled = true;
 
         //Check if anything was hit
         if (hit.transform == null  && !moving)

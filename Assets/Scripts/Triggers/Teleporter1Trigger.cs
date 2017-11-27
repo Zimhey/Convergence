@@ -41,7 +41,7 @@ public class Teleporter1Trigger : MonoBehaviour {
 		Taken = true;
 
 		//Love me some Debug statements
-		Debug.Log (otherTeleport);
+		Debug.Log (script.isTaken());
 		Debug.Log ("Teleporter entered.");
 
 		//Will need code to determine which boy enter the tele
