@@ -60,8 +60,10 @@ MonoBehaviour:
   - {fileID: 1239687473312066, guid: 2564383ef8d066b4480f50b552e0d8de, type: 2}
   IceTiles:
   - {fileID: 1952665415625478, guid: 05e34a6b663c04f49b2edef765aa66ee, type: 2}
-  TeleportTiles:
-  - {fileID: 1490590378554634, guid: 41386383825fe4b4ba103c26348a4440, type: 2}
+  Teleport1Tiles:
+  - {fileID: 1593088250925116, guid: fa64cd6d84d474f4eb2a9ec479fd58d6, type: 2}
+  Teleport2Tiles:
+  - {fileID: 1085697524965890, guid: b9a41e6600b07ce48ab432608fe452b9, type: 2}
   GateTiles:
   - {fileID: 1086905685740732, guid: f404fb77222bdfc47bdfd8d15a15e78f, type: 2}
   SwitchTiles:

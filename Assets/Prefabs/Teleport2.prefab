@@ -64,10 +64,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1085697524965890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 771d13db4b834984a84f0a4156da857d, type: 3}
+  m_Script: {fileID: 11500000, guid: 617b557a61e898044b8502119c278448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherTeleport: {fileID: 1593088250925116, guid: 9498ef522c423cd449c89915a3415593,
+  otherTeleport: {fileID: 1593088250925116, guid: fa64cd6d84d474f4eb2a9ec479fd58d6,
     type: 2}
   SingleMove: {fileID: 1561546754648298, guid: bcdb7c419affecb4f8641ec98216a685, type: 2}
 --- !u!212 &212758242427556622

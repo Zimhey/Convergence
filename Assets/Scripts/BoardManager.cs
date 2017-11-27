@@ -20,7 +20,8 @@ public enum TileTypes
     Ground,
 	Pit,
     Wall,
-	Teleport,
+	Teleport1,
+	Teleport2,
 	Gate,
 	Switch,
 	Slide,
@@ -40,7 +41,8 @@ public class BoardManager : MonoBehaviour
     public GameObject[] GroundTiles;
     public GameObject[] WallTiles;
 	public GameObject[] IceTiles;
-	public GameObject[] TeleportTiles;
+	public GameObject[] Teleport1Tiles;
+	public GameObject[] Teleport2Tiles;
 	public GameObject[] GateTiles;
 	public GameObject[] SwitchTiles;
 	public GameObject[] PitTiles;
@@ -85,8 +87,10 @@ public class BoardManager : MonoBehaviour
 				return IceTiles[Random.Range(0, IceTiles.Length)];
 			case TileTypes.Pit:
 				return PitTiles[Random.Range(0, PitTiles.Length)];
-			case TileTypes.Teleport:
-				return TeleportTiles[Random.Range(0, TeleportTiles.Length)];
+			case TileTypes.Teleport1:
+				return Teleport1Tiles[Random.Range(0, Teleport1Tiles.Length)];
+			case TileTypes.Teleport2:
+				return Teleport2Tiles[Random.Range(0, Teleport2Tiles.Length)];
 			case TileTypes.Gate:
 				return GateTiles[Random.Range(0, GateTiles.Length)];
 			case TileTypes.Switch:
@@ -126,8 +130,10 @@ public class BoardManager : MonoBehaviour
 			case TileTypes.Ice:
 				return TileTypes.Pit;
 			case TileTypes.Pit:
-				return TileTypes.Teleport;
-			case TileTypes.Teleport:
+				return TileTypes.Teleport1;
+			case TileTypes.Teleport1:
+				return TileTypes.Teleport2;
+			case TileTypes.Teleport2:
 				return TileTypes.Gate;
 			case TileTypes.Gate:
 				return TileTypes.Switch;
