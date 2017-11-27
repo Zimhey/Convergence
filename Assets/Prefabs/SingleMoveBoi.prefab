@@ -91,7 +91,7 @@ MonoBehaviour:
   moveTime: 0.1
   BlockingLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   inverseMoveTime: 0
