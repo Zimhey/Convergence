@@ -14,21 +14,31 @@ public class GoalTrigger : MonoBehaviour {
 	bool Char3Entered = false;
 	bool Char4Entered = false;
 
+	//Flag to make sure the trigger code only fires once
 	bool entered = false;
+	//Flag to make sure that the starting number of characters in the level is only counted once
+	bool total = false;
+
+	int numChars;
 
 	void OnTriggerEnter2D(Collider2D other) {
 
 		if (!entered) {
 			entered = true;
-			//Populate object array with all types of existing players on the board
-			//@TODO fix this with other characters
-			Characters = GameObject.FindGameObjectsWithTag ("SingleMove");
-			//Characters = GameObject.FindGameObjectsWithTag ("DoubleMove");
-			//Characters = GameObject.FindGameObjectsWithTag ("IceBoi");
-			//Characters = GameObject.FindGameObjectsWithTag ("?????");
+			if (!total) {
+				//Populate object array with all types of existing players on the board
+				//@TODO fix this with other characters
+				Characters = GameObject.FindGameObjectsWithTag ("SingleMove");
+				//Characters = GameObject.FindGameObjectsWithTag ("DoubleMove");
+				//Characters = GameObject.FindGameObjectsWithTag ("IceBoi");
+				//Characters = GameObject.FindGameObjectsWithTag ("?????");
 
-			//Check length of the array to see how many character's we're dealing with
-			int numChars = Characters.Length;
+				//Check length of the array to see how many character's we're dealing with
+				numChars = Characters.Length;
+
+				Debug.Log (numChars);
+				total = true;
+			}
 
 			//The most hideously disgusting if statement you've ever seen
 			if (numChars == 4) {
