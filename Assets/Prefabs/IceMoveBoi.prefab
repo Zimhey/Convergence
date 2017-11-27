@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50023709168090336}
   - component: {fileID: 114075777958986340}
   m_Layer: 8
-  m_Name: SingleMoveBoi (1)
+  m_Name: IceMoveBoi
   m_TagString: SingleMove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
