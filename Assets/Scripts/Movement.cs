@@ -112,6 +112,11 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
+    public void ChangeMovement(Vector3 end)
+    {
+
+    }
+
     protected abstract void OnCantMove();
 
     // Update is called once per frame

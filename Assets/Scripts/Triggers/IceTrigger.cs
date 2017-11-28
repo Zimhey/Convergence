@@ -11,8 +11,8 @@ public class IceTrigger : MonoBehaviour {
 	{
 		Debug.Log ("Character has entered Ice trigger.");
 
-		//stores current character object
-		Character = GameObject.FindGameObjectWithTag(other.tag);
+        //stores current character object
+        Character = other.gameObject;
 		Debug.Log (Character);
 
 		if (Character.tag == "SingleMove") {
@@ -22,7 +22,10 @@ public class IceTrigger : MonoBehaviour {
 
 			//Retrieve the last direction inputted by the player
 			int xDir = script.getLastHoriz ();
+            Debug.Log(xDir+ " is x");
 			int yDir = script.getLastVert ();
+            Debug.Log(yDir + " is y");
+
 
 			//Move the character in the last specified direction
 			script.AttemptMove (xDir, yDir);
