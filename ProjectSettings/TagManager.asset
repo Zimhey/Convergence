@@ -10,6 +10,8 @@ TagManager:
   - Tele2
   - IceMove
   - DoubleMove
+  - Tele3
+  - Tele4
   layers:
   - Default
   - TransparentFX

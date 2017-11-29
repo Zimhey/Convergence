@@ -13,6 +13,7 @@ public abstract class Movement : MonoBehaviour
     public float inverseMoveTime;
     public bool moving = false;
     public Queue<Vector3> moveQueue = new Queue<Vector3>();
+    public Coroutine coroutine;
 
     // Use this for initialization
     protected virtual void Start()
@@ -53,7 +54,7 @@ public abstract class Movement : MonoBehaviour
             moving = true;
             moveQueue.Enqueue(end);
             //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-            StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
+            coroutine = StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
             
             //Return true to say that Move was successful
             return true;
