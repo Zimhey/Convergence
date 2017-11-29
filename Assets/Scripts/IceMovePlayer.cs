@@ -83,7 +83,7 @@ public class IceMovePlayer : Movement {
         Vector2 end = start + new Vector2(xDir, yDir);
 
         //Disable the boxCollider so that linecast doesn't hit this object's own collider.
-        boxCollider.enabled = false;
+        
 
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
@@ -104,7 +104,7 @@ public class IceMovePlayer : Movement {
                 yTrans += yDir;
                 end = start + new Vector2(xTrans, yTrans);
             }
-            hit = Physics2D.Linecast(start, end);
+            hit = Physics2D.Linecast(start, end, BlockingLayer);
         }
 
         if (lastHoriz != 0)
@@ -117,8 +117,8 @@ public class IceMovePlayer : Movement {
             yTrans -= yDir;
             end = start + new Vector2(xTrans, yTrans);
         }
-        hit = Physics2D.Linecast(start, end);
-        boxCollider.enabled = true;
+        hit = Physics2D.Linecast(start, end, BlockingLayer);
+        
         Debug.Log(end.x + " " + end.y);
 
         //Check if anything was hit
@@ -126,7 +126,7 @@ public class IceMovePlayer : Movement {
         {
             moving = true;
             //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-            StartCoroutine(SmoothMovement(end));
+            coroutine = StartCoroutine(SmoothMovement(end));
 
             //Return true to say that Move was successful
             return true;

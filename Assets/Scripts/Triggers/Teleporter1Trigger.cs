@@ -69,6 +69,32 @@ public class Teleporter1Trigger : MonoBehaviour {
             playerScript.moveQueue.Enqueue(newDestination);
             playerScript.StartCoroutine(playerScript.SmoothMovement(playerScript.moveQueue.Dequeue()));
         }
+        else if(player.tag == "DoubleMove")
+        {
+            DoubleMovePlayer playerScript = player.GetComponent<DoubleMovePlayer>();
+            int xDir = playerScript.getLastHoriz();
+            int yDir = playerScript.getLastVert();
+            Vector3 newDestination = otherTeleport.gameObject.transform.position + new Vector3(xDir, yDir);
+
+            playerScript.StopCoroutine(playerScript.coroutine);
+            playerScript.gameObject.transform.SetPositionAndRotation(otherTeleport.transform.position, playerScript.gameObject.transform.rotation);
+            playerScript.moveQueue.Clear();
+            playerScript.moveQueue.Enqueue(newDestination);
+            playerScript.StartCoroutine(playerScript.SmoothMovement(playerScript.moveQueue.Dequeue()));
+        }
+        else if(player.tag == "IceMove")
+        {
+            IceMovePlayer playerScript = player.GetComponent<IceMovePlayer>();
+            int xDir = playerScript.getLastHoriz();
+            int yDir = playerScript.getLastVert();
+
+            playerScript.StopCoroutine(playerScript.coroutine);
+            playerScript.gameObject.transform.SetPositionAndRotation(otherTeleport.transform.position, playerScript.gameObject.transform.rotation);
+            playerScript.moveQueue.Clear();
+            playerScript.moving = false;
+            playerScript.AttemptMove(xDir, yDir);
+
+        }
 
 		
 	}

@@ -88,8 +88,9 @@ public abstract class Movement : MonoBehaviour
         }
         if(moveQueue.Count != 0)
         {
-            StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
+            coroutine = StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
         }
+        
         moving = false;
     }
 
