@@ -12,6 +12,7 @@ public abstract class Movement : MonoBehaviour
     public Rigidbody2D rb2D;
     public float inverseMoveTime;
     public bool moving = false;
+    public Queue<Vector3> moveQueue = new Queue<Vector3>();
 
     // Use this for initialization
     protected virtual void Start()
@@ -50,8 +51,9 @@ public abstract class Movement : MonoBehaviour
         if (hit.transform == null  && !moving)
         {
             moving = true;
+            moveQueue.Enqueue(end);
             //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-            StartCoroutine(SmoothMovement(end));
+            StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
             
             //Return true to say that Move was successful
             return true;
@@ -82,6 +84,10 @@ public abstract class Movement : MonoBehaviour
 
             //Return and loop until sqrRemainingDistance is close enough to zero to end the function
             yield return null;
+        }
+        if(moveQueue.Count != 0)
+        {
+            StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
         }
         moving = false;
     }

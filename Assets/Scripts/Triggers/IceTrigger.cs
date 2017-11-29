@@ -5,6 +5,7 @@ public class IceTrigger : MonoBehaviour {
 
 	//Game object to store character in
 	public GameObject Character;
+    
 
 	//Function that modifies the movement of the character
 	void OnTriggerEnter2D (Collider2D other)
@@ -26,9 +27,15 @@ public class IceTrigger : MonoBehaviour {
 			int yDir = script.getLastVert ();
             Debug.Log(yDir + " is y");
 
+            Vector3 endAdjust = new Vector2(xDir, yDir);
 
+            if(Physics2D.Linecast(gameObject.transform.position, gameObject.transform.position + endAdjust, script.BlockingLayer).transform == null)
+            {
+                Debug.Log("called");
+                script.moveQueue.Enqueue(gameObject.transform.position + endAdjust);
+            }
 			//Move the character in the last specified direction
-			script.AttemptMove (xDir, yDir);
+			//script.AttemptMove (xDir, yDir);
 		}
 	}
 }
