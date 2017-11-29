@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4016222057048892}
   - component: {fileID: 212393157330760656}
   - component: {fileID: 61172324574773106}
+  - component: {fileID: 114838744408023000}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -54,7 +55,22 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 1, y: 1}
+--- !u!114 &114838744408023000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1336726304873410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba8a931b7bf9314aba1008a32f20e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GateTiles:
+  - {fileID: 1086905685740732, guid: f404fb77222bdfc47bdfd8d15a15e78f, type: 2}
+  GateClosed: {fileID: 21300000, guid: c0279cdca06bbd841b3f123d57777ed3, type: 3}
+  GateOpen: {fileID: 21300002, guid: c0279cdca06bbd841b3f123d57777ed3, type: 3}
 --- !u!212 &212393157330760656
 SpriteRenderer:
   m_ObjectHideFlags: 1

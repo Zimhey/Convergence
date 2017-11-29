@@ -149,16 +149,18 @@ MonoBehaviour:
   - {fileID: 1239687473312066, guid: 2564383ef8d066b4480f50b552e0d8de, type: 2}
   IceTiles:
   - {fileID: 1952665415625478, guid: 05e34a6b663c04f49b2edef765aa66ee, type: 2}
-  TeleportTiles:
-  - {fileID: 1490590378554634, guid: 41386383825fe4b4ba103c26348a4440, type: 2}
+  Teleport1Tiles:
+  - {fileID: 1593088250925116, guid: fa64cd6d84d474f4eb2a9ec479fd58d6, type: 2}
+  Teleport2Tiles:
+  - {fileID: 1085697524965890, guid: b9a41e6600b07ce48ab432608fe452b9, type: 2}
   GateTiles:
   - {fileID: 1086905685740732, guid: f404fb77222bdfc47bdfd8d15a15e78f, type: 2}
   SwitchTiles:
   - {fileID: 1336726304873410, guid: 96263ec2563d0c9489c58992a847ef8b, type: 2}
   PitTiles:
   - {fileID: 1500469662035334, guid: 49d4ccc6bc21030499d35b9958b308de, type: 2}
-  StartTiles:
-  - {fileID: 1262428803955204, guid: 4c0fdd87ece77c54f914af11e0430cf8, type: 2}
+  Start1Tiles:
+  - {fileID: 1578457052537562, guid: ee070e0a892011748827754316127241, type: 2}
   GoalTiles:
   - {fileID: 1499553719346330, guid: 6999a071ae0c3f444a186d90d116610b, type: 2}
   ErrorTile: {fileID: 0}
@@ -343,7 +345,7 @@ Prefab:
     - target: {fileID: 224687727496498002, guid: 4ecf59a97d3a25c41be4312611973dad,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 224644595748241988, guid: 4ecf59a97d3a25c41be4312611973dad,
         type: 2}
@@ -373,7 +375,7 @@ Prefab:
     - target: {fileID: 224348006484810926, guid: 4ecf59a97d3a25c41be4312611973dad,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 133.33334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224214913007517354, guid: 4ecf59a97d3a25c41be4312611973dad,
         type: 2}
@@ -383,7 +385,7 @@ Prefab:
     - target: {fileID: 224214913007517354, guid: 4ecf59a97d3a25c41be4312611973dad,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -133.33331
+      value: -749.91956
       objectReference: {fileID: 0}
     - target: {fileID: 114963286877974464, guid: 4ecf59a97d3a25c41be4312611973dad,
         type: 2}
@@ -399,16 +401,6 @@ Prefab:
         type: 2}
       propertyPath: m_LocalPosition.y
       value: -455.17966
-      objectReference: {fileID: 0}
-    - target: {fileID: 114086488516067426, guid: 4ecf59a97d3a25c41be4312611973dad,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SaveLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 114220762877996294, guid: 4ecf59a97d3a25c41be4312611973dad,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ecf59a97d3a25c41be4312611973dad, type: 2}

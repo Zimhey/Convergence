@@ -12,6 +12,8 @@ public abstract class Movement : MonoBehaviour
     public Rigidbody2D rb2D;
     public float inverseMoveTime;
     public bool moving = false;
+    public Queue<Vector3> moveQueue = new Queue<Vector3>();
+    public Coroutine coroutine;
 
     // Use this for initialization
     protected virtual void Start()
@@ -28,7 +30,7 @@ public abstract class Movement : MonoBehaviour
         
     }
 
-    protected virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
+    public virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
         //Store start position to move from, based on objects current transform position.
         Vector2 start = transform.position;
@@ -37,21 +39,22 @@ public abstract class Movement : MonoBehaviour
         Vector2 end = start + new Vector2(xDir, yDir);
 
         //Disable the boxCollider so that linecast doesn't hit this object's own collider.
-        boxCollider.enabled = false;
+        //boxCollider.enabled = false;
 
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
         
 
         //Re-enable boxCollider after linecast
-        boxCollider.enabled = true;
+       // boxCollider.enabled = true;
 
         //Check if anything was hit
         if (hit.transform == null  && !moving)
         {
             moving = true;
+            moveQueue.Enqueue(end);
             //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-            StartCoroutine(SmoothMovement(end));
+            coroutine = StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
             
             //Return true to say that Move was successful
             return true;
@@ -62,7 +65,7 @@ public abstract class Movement : MonoBehaviour
     }
 
 
-    private IEnumerator SmoothMovement(Vector3 end)
+    public IEnumerator SmoothMovement(Vector3 end)
     {
         //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
         //Square magnitude is used instead of magnitude because it's computationally cheaper.
@@ -83,10 +86,15 @@ public abstract class Movement : MonoBehaviour
             //Return and loop until sqrRemainingDistance is close enough to zero to end the function
             yield return null;
         }
+        if(moveQueue.Count != 0)
+        {
+            coroutine = StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
+        }
+        
         moving = false;
     }
 
-    protected virtual void AttemptMove(int xDir, int yDir)
+    public virtual void AttemptMove(int xDir, int yDir)
     {
         //Hit will store whatever our linecast hits when Move is called.
         RaycastHit2D hit;
@@ -96,14 +104,25 @@ public abstract class Movement : MonoBehaviour
         bool canMove = Move(xDir, yDir, out hit);
 
         //Check if nothing was hit by linecast
-        if (hit.transform == null)
-            //If nothing was hit, return and don't execute further code.
-            return;
+		if (hit.transform == null) { 
+			//If nothing was hit, return and don't execute further code.
+			return;
+			/*
+		if (hit.collider){
+			OnTriggerEnter2D (hit.collider, xDir, yDir);
+		}
+		*/
+		}
 
         if (!canMove)
         {
             OnCantMove();
         }
+    }
+
+    public void ChangeMovement(Vector3 end)
+    {
+
     }
 
     protected abstract void OnCantMove();

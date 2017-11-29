@@ -18,7 +18,7 @@
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Goal</TileTypes>
-      <TileTypes>Teleport</TileTypes>
+      <TileTypes>Teleport1</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
@@ -101,13 +101,13 @@
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Start</TileTypes>
+      <TileTypes>Start1</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Teleport</TileTypes>
+      <TileTypes>Teleport2</TileTypes>
       <TileTypes>Pit</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>

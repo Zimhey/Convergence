@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4292380391371958}
   - component: {fileID: 212368039928766220}
   - component: {fileID: 61773952763565060}
+  - component: {fileID: 114460242037411898}
   m_Layer: 0
   m_Name: Ice
   m_TagString: Untagged
@@ -55,6 +56,18 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &114460242037411898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952665415625478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11bae77fad8d234c9d520ecc63516f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 0}
 --- !u!212 &212368039928766220
 SpriteRenderer:
   m_ObjectHideFlags: 1

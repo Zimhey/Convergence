@@ -37,7 +37,6 @@ public class UIManager : MonoBehaviour
     public GameObject LevelDropDown;
     public GameObject PausePanel;
     public GameObject LevelBuilderPanel;
-    public GameObject LevelBuilderNameTextBox;
 
     private int levelIndex;
     private string levelName;

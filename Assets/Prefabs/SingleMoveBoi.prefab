@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 61925244652701478}
   - component: {fileID: 50168145983751506}
   - component: {fileID: 114476515477088978}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SingleMoveBoi
-  m_TagString: Untagged
+  m_TagString: SingleMove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 0.2, y: 0.2}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -100,9 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 0.1
+  BlockingLayer:
+    serializedVersion: 2
+    m_Bits: 256
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   inverseMoveTime: 0
+  moving: 0
 --- !u!212 &212671556721598738
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -142,7 +146,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
