@@ -8,6 +8,8 @@ TagManager:
   - Gate
   - Tele1
   - Tele2
+  - IceMove
+  - DoubleMove
   layers:
   - Default
   - TransparentFX

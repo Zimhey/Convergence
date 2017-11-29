@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 61137102356988296}
   - component: {fileID: 50023709168090336}
   - component: {fileID: 114075777958986340}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: IceMoveBoi
-  m_TagString: SingleMove
+  m_TagString: IceMove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   moveTime: 0.1
   BlockingLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   boxCollider: {fileID: 0}
   rb2D: {fileID: 0}
   inverseMoveTime: 0

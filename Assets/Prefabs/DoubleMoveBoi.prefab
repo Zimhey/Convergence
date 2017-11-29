@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 61392126070201052}
   - component: {fileID: 50276624773842764}
   - component: {fileID: 114150886580392140}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: DoubleMoveBoi
-  m_TagString: SingleMove
+  m_TagString: DoubleMove
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
