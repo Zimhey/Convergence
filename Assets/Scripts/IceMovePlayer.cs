@@ -29,11 +29,14 @@ public class IceMovePlayer : Movement {
         //Used to store the vertical move direction.
         int vertical = 0;
 
-        //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
-        horizontal = (int)(Input.GetAxisRaw("Horizontal"));
+        if (!moving)
+        {
+            //Get input from the input manager, round it to an integer and store in horizontal to set x axis move direction
+            horizontal = (int)(Input.GetAxisRaw("Horizontal"));
 
-        //Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-        vertical = (int)(Input.GetAxisRaw("Vertical"));
+            //Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
+            vertical = (int)(Input.GetAxisRaw("Vertical"));
+        }
 
         //Check if moving horizontally, if so set vertical to zero.
         if (horizontal != 0)
