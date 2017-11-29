@@ -7,11 +7,16 @@ public enum UserInterfaceScreens
     MainMenu,
     LevelSelect,
     Pause,
+    LevelBuilder,
     None
 }
 
 public class UIManager : MonoBehaviour
 {
+    public GameManager GM;
+
+    public UserInterfaceScreens StartScreen;
+
     private UserInterfaceScreens screen;
     public UserInterfaceScreens Screen
     {
@@ -31,9 +36,11 @@ public class UIManager : MonoBehaviour
     public GameObject LevelSelectPanel;
     public GameObject LevelDropDown;
     public GameObject PausePanel;
-    public GameManager GM;
+    public GameObject LevelBuilderPanel;
+    public GameObject LevelBuilderNameTextBox;
 
     private int levelIndex;
+    private string levelName;
 
     // Use this for initialization
     void Start () {
@@ -43,12 +50,32 @@ public class UIManager : MonoBehaviour
         dropDownBox.AddOptions(GM.GetLevelList());
         dropDownBox.RefreshShownValue();
         levelIndex = 0;
+
+        screen = StartScreen;
+        setPanel(screen, true);
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public void SaveLevel()
+    {
+        if(levelName != null)
+            GM.Board.SaveBoard("Levels/" + levelName + ".xml");
+    }
+
+    public void LoadLevel()
+    {
+        if (levelName != null)
+            GM.Board.LoadBoard("Levels/" + levelName + ".xml");
+    }
+
+    public void SetBuilderLevelName(string name)
+    {
+        levelName = name;
+    }
 
     public void ShowMainMenu()
     {
@@ -58,6 +85,11 @@ public class UIManager : MonoBehaviour
     public void ShowLevelSelect()
     {
         Screen = UserInterfaceScreens.LevelSelect;
+    }
+
+    public void ShowLevelBuilder()
+    {
+        Screen = UserInterfaceScreens.LevelBuilder;
     }
 
     public void setLevel(int index)
@@ -101,5 +133,7 @@ public class UIManager : MonoBehaviour
             LevelSelectPanel.SetActive(active);
         else if (target == UserInterfaceScreens.Pause)
             PausePanel.SetActive(active);
+        else if (target == UserInterfaceScreens.LevelBuilder)
+            LevelBuilderPanel.SetActive(active);
     }
 }

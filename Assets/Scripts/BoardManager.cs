@@ -1,5 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
 
 /*
@@ -29,12 +33,18 @@ public enum TileTypes
 	Goal
 }
 
-public class BoardManager : MonoBehaviour
+[System.Serializable]
+public struct BoardInfo
 {
     public int Rows;
     public int Columns;
 
     public TileTypes[][] Tiles;
+}
+
+public class BoardManager : MonoBehaviour
+{
+    public BoardInfo Board;
 
     public GameObject BoardObject;
     public GameObject[] GroundTiles;
@@ -51,22 +61,43 @@ public class BoardManager : MonoBehaviour
 
     private void Resize()
     {
-        Tiles = new TileTypes[Rows][];
+        Board.Tiles = new TileTypes[Board.Rows][];
 
-        for(int i = 0; i < Columns; i++)
+        for(int i = 0; i < Board.Columns; i++)
         {
-            Tiles[i] = new TileTypes[Columns];
+            Board.Tiles[i] = new TileTypes[Board.Columns];
         }
+    }
+
+    public void SaveBoard(string name)
+    {
+        XmlSerializer ser = new XmlSerializer(typeof(BoardInfo));
+
+        using (StreamWriter writer = new StreamWriter(name))
+        {
+            ser.Serialize(writer, Board);
+        }
+    }
+
+    public void LoadBoard(string name)
+    {
+        XmlSerializer ser = new XmlSerializer(typeof(BoardInfo));
+        FileStream fs = new FileStream(name, FileMode.Open);
+        XmlReader reader = XmlReader.Create(fs);
+
+        Board = (BoardInfo)ser.Deserialize(reader);
+        RemoveBoard();
+        SpawnBoard();
     }
 
     public void SpawnBoard()
     {
         BoardObject = new GameObject("Board");
-        for(int i = 0; i < Rows; i++)
+        for(int i = 0; i < Board.Rows; i++)
         {
-            for(int j = 0; j < Columns; j++)
+            for(int j = 0; j < Board.Columns; j++)
             {
-                GameObject obj = Instantiate(RandomTile(Tiles[i][j]));
+                GameObject obj = Instantiate(RandomTile(Board.Tiles[i][j]));
                 obj.transform.parent = BoardObject.transform;
                 obj.transform.position = new Vector3(i, j);
             }
@@ -94,7 +125,7 @@ public class BoardManager : MonoBehaviour
 			case TileTypes.Start:
 				return StartTiles[Random.Range(0, StartTiles.Length)];
 			case TileTypes.Goal:
-				return GoalTiles[Random.RandomRange(0, GoalTiles.Length)];
+				return GoalTiles[Random.Range(0, GoalTiles.Length)];
 			default:
 		        return ErrorTile;
         }
@@ -102,17 +133,23 @@ public class BoardManager : MonoBehaviour
 
     public void RemoveBoard()
     {
-        Destroy(BoardObject);
+        if (BoardObject != null)
+            Destroy(BoardObject);
     }
 
     public void ClickedMapPoint(Vector2 point)
     {
-        int x = Mathf.RoundToInt(point.x);
-        int y = Mathf.RoundToInt(point.y);
-        Debug.Log("Clicked: " + x + " " + y);
-        Tiles[x][y] = NextTileType(Tiles[x][y]);
-        RemoveBoard();
-        SpawnBoard();
+        try
+        {
+            int x = Mathf.RoundToInt(point.x);
+            int y = Mathf.RoundToInt(point.y);
+            Debug.Log("Clicked: " + x + " " + y);
+            Board.Tiles[x][y] = NextTileType(Board.Tiles[x][y]);
+            RemoveBoard();
+            SpawnBoard();
+        }
+        catch (System.IndexOutOfRangeException) { };
+
     }
 
     public TileTypes NextTileType(TileTypes type)
