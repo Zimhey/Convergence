@@ -6,15 +6,17 @@ public enum UserInterfaceScreens
 {
     MainMenu,
     LevelSelect,
+    Loading,
     Pause,
+    Win,
+    WinCustom,
+    Lose,
     LevelBuilder,
     None
 }
 
 public class UIManager : MonoBehaviour
 {
-    public GameManager GM;
-
     public UserInterfaceScreens StartScreen;
 
     private UserInterfaceScreens screen;
@@ -35,7 +37,11 @@ public class UIManager : MonoBehaviour
     public GameObject MainMenuPanel;
     public GameObject LevelSelectPanel;
     public GameObject LevelDropDown;
+    public GameObject LoadingPanel;
     public GameObject PausePanel;
+    public GameObject WinPanel;
+    public GameObject WinCustomPanel;
+    public GameObject LosePanel;
     public GameObject LevelBuilderPanel;
 
     private int levelIndex;
@@ -44,14 +50,15 @@ public class UIManager : MonoBehaviour
     // Use this for initialization
     void Start () {
          // Add Levels
-        UnityEngine.UI.Dropdown dropDownBox = LevelDropDown.GetComponent<UnityEngine.UI.Dropdown>();
+        /*UnityEngine.UI.Dropdown dropDownBox = LevelDropDown.GetComponent<UnityEngine.UI.Dropdown>();
         dropDownBox.ClearOptions();
         dropDownBox.AddOptions(GM.GetLevelList());
-        dropDownBox.RefreshShownValue();
+        dropDownBox.RefreshShownValue(); */
         levelIndex = 0;
 
         screen = StartScreen;
         setPanel(screen, true);
+
     }
 	
 	// Update is called once per frame
@@ -62,13 +69,13 @@ public class UIManager : MonoBehaviour
     public void SaveLevel()
     {
         if(levelName != null)
-            GM.Board.SaveBoard("Levels/" + levelName + ".xml");
+            GameManager.Instance.BM.SaveBoard("Levels/" + levelName + ".xml");
     }
 
     public void LoadLevel()
     {
         if (levelName != null)
-            GM.Board.LoadBoard("Levels/" + levelName + ".xml");
+            GameManager.Instance.BM.LoadBoard("Levels/" + levelName + ".xml");
     }
 
     public void SetBuilderLevelName(string name)
@@ -89,6 +96,7 @@ public class UIManager : MonoBehaviour
     public void ShowLevelBuilder()
     {
         Screen = UserInterfaceScreens.LevelBuilder;
+        GameManager.Instance.State = GameState.LevelBuilding;
     }
 
     public void setLevel(int index)
@@ -97,7 +105,12 @@ public class UIManager : MonoBehaviour
     }
     public void PlayClicked()
     {
-        GM.LoadLevel(GM.GetLevel(levelIndex));
+        GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
+    }
+
+    public void RetryClicked()
+    {
+        GameManager.Instance.RetryLevel();
     }
 
     public void ShowPause()
@@ -124,15 +137,34 @@ public class UIManager : MonoBehaviour
 #endif
     }
 
-    private void setPanel(UserInterfaceScreens target, bool active)
+    private void setPanel(UserInterfaceScreens panel, bool active)
     {
-        if (target == UserInterfaceScreens.MainMenu)
-            MainMenuPanel.SetActive(active);
-        else if (target == UserInterfaceScreens.LevelSelect)
-            LevelSelectPanel.SetActive(active);
-        else if (target == UserInterfaceScreens.Pause)
-            PausePanel.SetActive(active);
-        else if (target == UserInterfaceScreens.LevelBuilder)
-            LevelBuilderPanel.SetActive(active);
+        switch(panel)
+        {
+            case UserInterfaceScreens.MainMenu:
+                MainMenuPanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.LevelSelect:
+                LevelSelectPanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.Loading:
+                LoadingPanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.Pause:
+                PausePanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.Win:
+                WinPanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.WinCustom:
+                WinCustomPanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.Lose:
+                LosePanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.LevelBuilder:
+                LevelBuilderPanel.SetActive(active);
+                break;
+        }
     }
 }

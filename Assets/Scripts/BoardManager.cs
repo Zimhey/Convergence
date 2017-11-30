@@ -6,19 +6,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
 
-/*
- 	Start,
- 	Goal,
-    Ground,
-    Pit,
-    Wall,
-    Teleport,
-    Gate,
-    Switch,
-    Slide,
-    Ice,
-    Rotator
-    */
 public enum TileTypes
 {
     Ground,
@@ -47,7 +34,10 @@ public class BoardManager : MonoBehaviour
 {
     public BoardInfo Board;
 
+    [HideInInspector]
     public GameObject BoardObject;
+
+    // Tiles
     public GameObject[] GroundTiles;
     public GameObject[] WallTiles;
 	public GameObject[] IceTiles;
@@ -94,6 +84,7 @@ public class BoardManager : MonoBehaviour
 
     public void SpawnBoard()
     {
+        RemoveBoard();
         BoardObject = new GameObject("Board");
         for(int i = 0; i < Board.Rows; i++)
         {
@@ -104,6 +95,25 @@ public class BoardManager : MonoBehaviour
                 obj.transform.position = new Vector3(i, j);
             }
         }
+    }
+
+    public List<Movement> SpawnPlayers()
+    {
+        List<Movement> players = new List<Movement>();
+
+        for (int i = 0; i < Board.Rows; i++)
+        {
+            for (int j = 0; j < Board.Columns; j++)
+            {
+                switch(Board.Tiles[i][j])
+                {
+                    case TileTypes.Start1:
+                        // TODO Spawn Player Prefab and add to players
+                        break;
+                }
+            }
+        }
+        return players;
     }
 
     private GameObject RandomTile(TileTypes type)
@@ -147,7 +157,6 @@ public class BoardManager : MonoBehaviour
         {
             int x = Mathf.RoundToInt(point.x);
             int y = Mathf.RoundToInt(point.y);
-            Debug.Log("Clicked: " + x + " " + y);
             Board.Tiles[x][y] = NextTileType(Board.Tiles[x][y]);
             RemoveBoard();
             SpawnBoard();
@@ -199,7 +208,12 @@ public class BoardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        if(GameManager.Instance.State == GameState.LevelBuilding)
+        {
+            if (Input.GetMouseButtonDown(0))
+                ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            // TODO Right click Level Builder
+        }
+
     }
 }

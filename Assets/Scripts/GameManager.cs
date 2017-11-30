@@ -5,17 +5,43 @@ using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    MainMenu,
-    Loading,
+    Menu,
     WaitForInput,
     WaitForMoveComplete,
-    Pause
+    Pause,
+    LevelBuilding
 }
 
+[RequireComponent(typeof(BoardManager))]
 public class GameManager : MonoBehaviour
 {
-    public BoardManager Board;
+    private static GameManager instance = null;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameManager(); // TODO Make a prefab to instanciate here
+                DontDestroyOnLoad(instance);
+            }
+            return instance;
+        }
+    }
+
+    public UIManager UIM;
+    [HideInInspector]
+    public BoardManager BM;
+    [HideInInspector]
+    public GameObject PlayerRoot;
+    [HideInInspector]
+    public List<Movement> Players;
+
+    private bool customLevel;
+
     private GameState state;
+    private GameState stateBeforePause;
     public GameState State
     {
         get
@@ -26,11 +52,6 @@ public class GameManager : MonoBehaviour
         {
             if (state != value)
             {
-                if (value == GameState.MainMenu)
-                    ShowMainMenu();
-                if (value == GameState.Pause)
-                    OnGamePause();
-
             }
             state = value;
         }
@@ -48,13 +69,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    //public List<SingleMovePlayer> characters;
-
     // Use this for initialization
     void Start()
     {
-        State = GameState.MainMenu;
+        if (instance == null)
+        {
+            instance = this;
+            BM = GetComponent<BoardManager>();
+            State = GameState.Menu;
+        }
+        else
+        {
+            Debug.LogWarning("Warning: Attempted to spawn a second GameManager");
+            Destroy(gameObject);
+        }
+
     }
 
     // Update is called once per frame
@@ -62,35 +91,119 @@ public class GameManager : MonoBehaviour
     {
         switch (State)
         {
-            case GameState.MainMenu:
-                break;
-            case GameState.Loading:
-                break;
             case GameState.WaitForInput:
+                PollForInput();
+                PollForPause();
                 break;
             case GameState.WaitForMoveComplete:
-                break;
-            case GameState.Pause:
+                PollForTurnEnd();
                 break;
         }
     }
 
-    public void LoadLevel(string level)
+    public void LoadLevel(string name)
     {
-        State = GameState.Loading;
-        SceneManager.LoadScene(LevelList[level]);
+        customLevel = false;
+        BM.LoadBoard(name);
+        SetupBoard();
+        UIM.Screen = UserInterfaceScreens.None;
+    }
+
+    public void LoadCustomLevel(string name)
+    {
+        customLevel = true;
+        BM.LoadBoard(name);
+        SetupBoard();
+        UIM.Screen = UserInterfaceScreens.None;
+    }
+
+    public void RetryLevel()
+    {
+        // clean up
+        if (PlayerRoot != null)
+            Destroy(PlayerRoot);
+        SetupBoard();
+    }
+
+    public void SetupBoard()
+    {
+        // Spawn Board
+        BM.SpawnBoard();
+        // Spawn Players
+        PlayerRoot = new GameObject("Players");
+        Players = BM.SpawnPlayers();
+        foreach (Movement p in Players)
+            p.transform.parent = PlayerRoot.transform;
+        // Begin Game
         State = GameState.WaitForInput;
     }
 
-
-    private void OnGamePause()
+    public void PollForPause()
     {
-        //https://answers.unity.com/questions/904429/pause-and-resume-coroutine-1.html
+        if (Input.GetButtonDown("escape"))
+        {
+            stateBeforePause = State;
+            State = GameState.Pause;
+            // TODO pause game https://answers.unity.com/questions/904429/pause-and-resume-coroutine-1.html
+            UIM.Screen = UserInterfaceScreens.Pause;
+        }
     }
 
-    private void ShowMainMenu()
+    public void PollForInput()
     {
+        int horizontal = (int)(Input.GetAxisRaw("Horizontal"));
+        int vertical = (int)(Input.GetAxisRaw("Vertical"));
 
+        if (horizontal != 0)
+            vertical = 0;
+
+        if (horizontal != 0 || vertical != 0)
+        {
+            foreach(Movement p in Players)
+                p.AttemptMove(horizontal, vertical);
+            State = GameState.WaitForMoveComplete;
+        }
+    }
+
+    public void PollForTurnEnd()
+    {
+        // if there is a player still moving exit the method
+        foreach (Movement p in Players)
+            if (p.moving)
+                return;
+        State = GameState.WaitForInput;
+    }
+
+    public void GoalReached(GameObject player)
+    {
+        Movement m = player.GetComponent<Movement>();
+
+        Players.Remove(m);
+
+        if (Players.Count == 0)
+        {
+            // clean up
+            if (PlayerRoot != null)
+                Destroy(PlayerRoot);
+            BM.RemoveBoard();
+
+            State = GameState.Menu;
+
+            if (customLevel)
+                UIM.Screen = UserInterfaceScreens.WinCustom;
+            else
+                UIM.Screen = UserInterfaceScreens.Win;
+        }
+
+    }
+
+    public void PlayerDied(GameObject player)
+    {
+        if(State == GameState.WaitForMoveComplete)
+        {
+            State = GameState.Menu;
+            UIM.Screen = UserInterfaceScreens.Lose;
+        }
     }
 
     public string GetLevel(int index)
