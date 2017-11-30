@@ -86,12 +86,14 @@ public abstract class Movement : MonoBehaviour
             //Return and loop until sqrRemainingDistance is close enough to zero to end the function
             yield return null;
         }
-        if(moveQueue.Count != 0)
+        if (moveQueue.Count != 0)
         {
             coroutine = StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
         }
-        
-        moving = false;
+        else
+        {
+            moving = false;
+        }
     }
 
     public virtual void AttemptMove(int xDir, int yDir)
