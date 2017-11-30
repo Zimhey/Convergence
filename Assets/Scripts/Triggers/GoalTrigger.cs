@@ -6,7 +6,7 @@ using UnityEngine;
 public class GoalTrigger : MonoBehaviour {
 
 	//Hold all characters in current level
-	public GameObject[] Characters;
+	public Movement[] Characters;
 
 	//Flags for whether or not these characters have entered the goal
 	bool Char1Entered = false;
@@ -28,7 +28,7 @@ public class GoalTrigger : MonoBehaviour {
 			if (!total) {
 				//Populate object array with all types of existing players on the board
 				//@TODO fix this with other characters
-				Characters = GameObject.FindGameObjectsWithTag ("SingleMove");
+				Characters = GameObject.FindObjectsOfType<Movement>();
 				//Characters = GameObject.FindGameObjectsWithTag ("DoubleMove");
 				//Characters = GameObject.FindGameObjectsWithTag ("IceBoi");
 				//Characters = GameObject.FindGameObjectsWithTag ("?????");

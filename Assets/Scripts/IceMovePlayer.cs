@@ -66,7 +66,7 @@ public class IceMovePlayer : Movement {
         RaycastHit2D hit;
 
         //Set canMove to true if Move was successful, false if failed.
-
+        
         bool canMove = Move(xDir, yDir, out hit);
 
         if (canMove)
@@ -93,32 +93,34 @@ public class IceMovePlayer : Movement {
 
 
         //Re-enable boxCollider after linecast
-        
 
-        while(hit.transform == null)
+        if (hit.transform == null)
         {
-            if(lastHoriz != 0)
+            while (hit.transform == null)
             {
-                xTrans += xDir;
+                if (lastHoriz != 0)
+                {
+                    xTrans += xDir;
+                    end = start + new Vector2(xTrans, yTrans);
+                }
+                else if (lastVert != 0)
+                {
+                    yTrans += yDir;
+                    end = start + new Vector2(xTrans, yTrans);
+                }
+                hit = Physics2D.Linecast(start, end, BlockingLayer);
+            }
+
+            if (lastHoriz != 0)
+            {
+                xTrans -= xDir;
                 end = start + new Vector2(xTrans, yTrans);
             }
-            else if(lastVert != 0)
+            else if (lastVert != 0)
             {
-                yTrans += yDir;
+                yTrans -= yDir;
                 end = start + new Vector2(xTrans, yTrans);
             }
-            hit = Physics2D.Linecast(start, end, BlockingLayer);
-        }
-
-        if (lastHoriz != 0)
-        {
-            xTrans -= xDir;
-            end = start + new Vector2(xTrans, yTrans);
-        }
-        else if (lastVert != 0)
-        {
-            yTrans -= yDir;
-            end = start + new Vector2(xTrans, yTrans);
         }
         hit = Physics2D.Linecast(start, end, BlockingLayer);
         
