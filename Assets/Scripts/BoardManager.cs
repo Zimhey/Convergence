@@ -18,6 +18,8 @@ public enum TileTypes
 	Slide,
 	Ice,
 	Start1,
+    Start2,
+    StartSlide,
 	Goal
 }
 
@@ -47,6 +49,8 @@ public class BoardManager : MonoBehaviour
 	public GameObject[] SwitchTiles;
 	public GameObject[] PitTiles;
 	public GameObject[] Start1Tiles;
+	public GameObject[] Start2Tiles;
+	public GameObject[] StartSlideTiles;
 	public GameObject[] GoalTiles;
 
     public GameObject ErrorTile;
@@ -138,7 +142,11 @@ public class BoardManager : MonoBehaviour
 				return SwitchTiles[Random.Range(0, SwitchTiles.Length)];
 			case TileTypes.Start1:
 				return Start1Tiles[Random.Range(0, Start1Tiles.Length)];
-			case TileTypes.Goal:
+            case TileTypes.Start2:
+                return Start2Tiles[Random.Range(0, Start2Tiles.Length)];
+            case TileTypes.StartSlide:
+                return StartSlideTiles[Random.Range(0, StartSlideTiles.Length)];
+            case TileTypes.Goal:
 				return GoalTiles[Random.Range(0, GoalTiles.Length)];
 			default:
 		        return ErrorTile;
@@ -186,7 +194,11 @@ public class BoardManager : MonoBehaviour
 			case TileTypes.Switch:
 				return TileTypes.Start1;
 			case TileTypes.Start1:
-				return TileTypes.Goal;
+                return TileTypes.Start2;
+            case TileTypes.Start2:
+                return TileTypes.StartSlide;
+            case TileTypes.StartSlide:
+                return TileTypes.Goal;
 			case TileTypes.Goal:
 				return TileTypes.Ground;
             default:

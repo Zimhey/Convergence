@@ -77,17 +77,15 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFilterTypeDirect: 0
-    m_PVRFilterTypeIndirect: 0
-    m_PVRFilterTypeAO: 0
+    m_PVRFiltering: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-    m_PVRFilteringAtrousPositionSigmaIndirect: 2
-    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -109,8 +107,6 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-    debug:
-      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &822637241
 Prefab:
@@ -119,6 +115,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114538080914282194, guid: 0534a6d45ec8ac340b5cfbb5517207a2,
+        type: 2}
+      propertyPath: Start2Tiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114538080914282194, guid: 0534a6d45ec8ac340b5cfbb5517207a2,
+        type: 2}
+      propertyPath: StartSlideTiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4923158910286468, guid: 0534a6d45ec8ac340b5cfbb5517207a2, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -156,6 +162,18 @@ Prefab:
       propertyPath: UIM
       value: 
       objectReference: {fileID: 2023104702}
+    - target: {fileID: 114538080914282194, guid: 0534a6d45ec8ac340b5cfbb5517207a2,
+        type: 2}
+      propertyPath: Start2Tiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1406652263682302, guid: a6851814817104840aa2f9c54b87d92c,
+        type: 2}
+    - target: {fileID: 114538080914282194, guid: 0534a6d45ec8ac340b5cfbb5517207a2,
+        type: 2}
+      propertyPath: StartSlideTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1964501461364248, guid: d9f5f0547e09ad241af1941d9cc7130b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0534a6d45ec8ac340b5cfbb5517207a2, type: 2}
   m_IsPrefabParent: 0
@@ -226,6 +244,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!4 &1758610715
 Transform:
   m_ObjectHideFlags: 0
