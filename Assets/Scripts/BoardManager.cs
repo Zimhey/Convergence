@@ -16,6 +16,7 @@ public enum TileTypes
     Teleport3,
     Teleport4,
 	Gate,
+    OpenGate,
 	Switch,
 	Slide,
 	Ice,
@@ -60,6 +61,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] Teleport3Tiles;
     public GameObject[] Teleport4Tiles;
     public GameObject[] GateTiles;
+    public GameObject[] OpenGateTiles;
 	public GameObject[] SwitchTiles;
 	public GameObject[] PitTiles;
 	public GameObject[] Start1Tiles;
@@ -189,6 +191,8 @@ public class BoardManager : MonoBehaviour
                 return ArrayToRandomTile(Teleport4Tiles);
             case TileTypes.Gate:
                 return ArrayToRandomTile(GateTiles);
+            case TileTypes.OpenGate:
+                return ArrayToRandomTile(OpenGateTiles);
             case TileTypes.Switch:
                 return ArrayToRandomTile(SwitchTiles);
             case TileTypes.Start1:
@@ -254,6 +258,7 @@ public class BoardManager : MonoBehaviour
             case TileTypes.Teleport4:
                 return TileTypes.Gate;
 			case TileTypes.Gate:
+            case TileTypes.OpenGate:
 				return TileTypes.Switch;
 			case TileTypes.Switch:
 				return TileTypes.Start1;
@@ -293,6 +298,11 @@ public class BoardManager : MonoBehaviour
                 return TileTypes.Teleport4;
             case TileTypes.Teleport4:
                 return TileTypes.Teleport1;
+            // Gates
+            case TileTypes.Gate:
+                return TileTypes.OpenGate;
+            case TileTypes.OpenGate:
+                return TileTypes.Gate;
             default:
                 return type;
         }
