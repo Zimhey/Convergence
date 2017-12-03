@@ -106,6 +106,7 @@ public class UIManager : MonoBehaviour
     }
     public void PlayClicked()
     {
+        Debug.Log(GameManager.Instance.GetLevel(levelIndex));
         GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
     }
 

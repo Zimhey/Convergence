@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -139,7 +140,7 @@ public class GameManager : MonoBehaviour
 
     public void PollForPause()
     {
-        if (Input.GetButtonDown("escape"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             stateBeforePause = State;
             State = GameState.Pause;
@@ -211,7 +212,7 @@ public class GameManager : MonoBehaviour
 
     public string GetLevel(int index)
     {
-        return GetLevelList()[index];
+        return LevelList[GetLevelList()[index]]; // translate the index to a key and use to get level path
     }
 
     public List<string> GetLevelList()
@@ -222,8 +223,16 @@ public class GameManager : MonoBehaviour
     private void initLevelList()
     {
         levelList = new Dictionary<string, string>();
-        levelList.Add("Example Scene", "Scenes/Levels/ExampleScene");
+        //levelList.Add("Example Scene", "Scenes/Levels/ExampleScene");
         // TODO add more levels
+
+        // TODO make a custom levels list
+        foreach (string file in System.IO.Directory.GetFiles("Levels/"))
+        {
+            string name = file.Replace("Levels/", "");
+            name = name.Replace(".xml", "");
+            levelList.Add(name, file);
+        }
         levelListInitialized = true;
     }
 }
