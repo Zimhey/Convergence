@@ -28,6 +28,13 @@ public enum TileTypes
     ErrorTile
 }
 
+public class InvalidTileException : System.Exception
+{
+    public InvalidTileException(string message) : base(message)
+    {
+    }
+}
+
 [System.Serializable]
 public struct BoardInfo
 {
@@ -107,9 +114,20 @@ public class BoardManager : MonoBehaviour
         {
             for(int j = 0; j < Board.Columns; j++)
             {
-                GameObject obj = Instantiate(RandomTile(Board.Tiles[i][j]));
+                GameObject obj;
+                try
+                {
+                    obj = Instantiate(RandomTile(Board.Tiles[i][j]));
+
+                }
+                catch(InvalidTileException)
+                {
+                    Board.Tiles[i][j] = TileTypes.ErrorTile;
+                    obj = Instantiate(RandomTile(Board.Tiles[i][j]));
+                }
                 obj.transform.parent = BoardObject.transform;
                 obj.transform.position = new Vector3(i, j);
+
             }
         }
     }
@@ -183,8 +201,10 @@ public class BoardManager : MonoBehaviour
                 return ArrayToRandomTile(Start4Tiles);
             case TileTypes.Goal:
                 return ArrayToRandomTile(GoalTiles);
+            case TileTypes.ErrorTile:
+                return ErrorTile;
             default:
-		        return ErrorTile;
+                throw new InvalidTileException("Invalid Tile: " + type);
         }
     }
 
