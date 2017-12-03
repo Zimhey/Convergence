@@ -1029,7 +1029,7 @@ GameObject:
   - component: {fileID: 114649020479780630}
   - component: {fileID: 114165949287303992}
   m_Layer: 5
-  m_Name: ExitGameButton
+  m_Name: RetryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3128,9 +3128,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Retry
-
-'
+  m_Text: Restart Level
 --- !u!114 &114351985120587430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4673,7 +4671,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit Game
+  m_Text: Restart level
 --- !u!114 &114816114896002880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5018,7 +5016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d2d6c985495be40b8215327217a240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GM: {fileID: 0}
   StartScreen: 0
   MainMenuPanel: {fileID: 1543718559608106}
   LevelSelectPanel: {fileID: 1191596670438224}
@@ -6036,7 +6033,7 @@ RectTransform:
   m_Children:
   - {fileID: 224829487948960384}
   m_Father: {fileID: 224502448067069742}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6431,8 +6428,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224972514791070050}
-  - {fileID: 224651077156759614}
   - {fileID: 224253922183444340}
+  - {fileID: 224651077156759614}
   m_Father: {fileID: 224703855703612092}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6691,7 +6688,7 @@ RectTransform:
   m_Children:
   - {fileID: 224501303421882258}
   m_Father: {fileID: 224502448067069742}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
