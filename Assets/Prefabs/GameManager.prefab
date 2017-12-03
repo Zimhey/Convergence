@@ -87,6 +87,8 @@ MonoBehaviour:
   - {fileID: 1202176004866310, guid: 8f5f91cc36cd04b45b213b6007b73920, type: 2}
   GateTiles:
   - {fileID: 1086905685740732, guid: f404fb77222bdfc47bdfd8d15a15e78f, type: 2}
+  OpenGateTiles:
+  - {fileID: 1796283800649364, guid: 970eeb5ad51b0f14b9fdf20866b7c3eb, type: 2}
   SwitchTiles:
   - {fileID: 1336726304873410, guid: 96263ec2563d0c9489c58992a847ef8b, type: 2}
   PitTiles:
