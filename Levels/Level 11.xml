@@ -35,7 +35,7 @@
       <TileTypes>Wall</TileTypes>
       <TileTypes>Gate</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>StartSlide</TileTypes>
+      <TileTypes>Start3</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
