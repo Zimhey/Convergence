@@ -24,7 +24,8 @@ public enum TileTypes
     Start3,
     Start4,
     StartSlide,
-	Goal
+	Goal,
+    ErrorTile
 }
 
 [System.Serializable]
@@ -143,7 +144,7 @@ public class BoardManager : MonoBehaviour
 
     public Movement SpawnPlayer(int i, int j, GameObject prefab)
     {
-        Vector3 pos = new Vector3(i, j, 1);
+        Vector3 pos = new Vector3(i, j, 0);
         GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
         return obj.GetComponent<Movement>();
     }
@@ -243,6 +244,8 @@ public class BoardManager : MonoBehaviour
                 return TileTypes.Goal;
 			case TileTypes.Goal:
 				return TileTypes.Ground;
+            case TileTypes.ErrorTile:
+                return TileTypes.Ground;
             default:
                 return type;
         }

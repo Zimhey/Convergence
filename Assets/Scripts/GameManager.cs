@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
         // clean up
         CleanLevel();
         SetupBoard();
+        UIM.Screen = UserInterfaceScreens.None;
     }
 
     public void SetupBoard()
