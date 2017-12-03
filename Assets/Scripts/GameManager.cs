@@ -120,8 +120,7 @@ public class GameManager : MonoBehaviour
     public void RetryLevel()
     {
         // clean up
-        if (PlayerRoot != null)
-            Destroy(PlayerRoot);
+        CleanLevel();
         SetupBoard();
     }
 
@@ -182,11 +181,7 @@ public class GameManager : MonoBehaviour
 
         if (Players.Count == 0)
         {
-            // clean up
-            if (PlayerRoot != null)
-                Destroy(PlayerRoot);
-            BM.RemoveBoard();
-
+            CleanLevel();
             State = GameState.Menu;
 
             if (customLevel)
@@ -194,16 +189,24 @@ public class GameManager : MonoBehaviour
             else
                 UIM.Screen = UserInterfaceScreens.Win;
         }
-
     }
 
     public void PlayerDied(GameObject player)
     {
         if(State == GameState.WaitForMoveComplete)
         {
+            CleanLevel();
             State = GameState.Menu;
             UIM.Screen = UserInterfaceScreens.Lose;
         }
+    }
+
+    public void CleanLevel()
+    {
+        // clean up
+        if (PlayerRoot != null)
+            Destroy(PlayerRoot);
+        BM.RemoveBoard();
     }
 
     public string GetLevel(int index)

@@ -50,10 +50,10 @@ public class UIManager : MonoBehaviour
     // Use this for initialization
     void Start () {
          // Add Levels
-        /*UnityEngine.UI.Dropdown dropDownBox = LevelDropDown.GetComponent<UnityEngine.UI.Dropdown>();
+        UnityEngine.UI.Dropdown dropDownBox = LevelDropDown.GetComponent<UnityEngine.UI.Dropdown>();
         dropDownBox.ClearOptions();
-        dropDownBox.AddOptions(GM.GetLevelList());
-        dropDownBox.RefreshShownValue(); */
+        dropDownBox.AddOptions(GameManager.Instance.GetLevelList());
+        dropDownBox.RefreshShownValue(); 
         levelIndex = 0;
 
         screen = StartScreen;
@@ -86,6 +86,7 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         Screen = UserInterfaceScreens.MainMenu;
+        GameManager.Instance.State = GameState.Menu;
     }
 
     public void ShowLevelSelect()

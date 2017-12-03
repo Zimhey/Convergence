@@ -13,12 +13,16 @@ public enum TileTypes
     Wall,
 	Teleport1,
 	Teleport2,
+    Teleport3,
+    Teleport4,
 	Gate,
 	Switch,
 	Slide,
 	Ice,
 	Start1,
     Start2,
+    Start3,
+    Start4,
     StartSlide,
 	Goal
 }
@@ -45,15 +49,23 @@ public class BoardManager : MonoBehaviour
 	public GameObject[] IceTiles;
 	public GameObject[] Teleport1Tiles;
 	public GameObject[] Teleport2Tiles;
-	public GameObject[] GateTiles;
+    public GameObject[] Teleport3Tiles;
+    public GameObject[] Teleport4Tiles;
+    public GameObject[] GateTiles;
 	public GameObject[] SwitchTiles;
 	public GameObject[] PitTiles;
 	public GameObject[] Start1Tiles;
-	public GameObject[] Start2Tiles;
-	public GameObject[] StartSlideTiles;
-	public GameObject[] GoalTiles;
-
+    public GameObject[] Start2Tiles;
+    public GameObject[] Start3Tiles;
+    public GameObject[] Start4Tiles;
+    public GameObject[] GoalTiles;
     public GameObject ErrorTile;
+
+    public GameObject Start1Player;
+    public GameObject Start2Player;
+    public GameObject Start3Player;
+    public GameObject Start4Player;
+
 
     private void Resize()
     {
@@ -112,7 +124,16 @@ public class BoardManager : MonoBehaviour
                 switch(Board.Tiles[i][j])
                 {
                     case TileTypes.Start1:
-                        // TODO Spawn Player Prefab and add to players
+                        players.Add(SpawnPlayer(i, j, Start1Player));
+                        break;
+                    case TileTypes.Start2:
+                        players.Add(SpawnPlayer(i, j, Start2Player));
+                        break;
+                    case TileTypes.Start3:
+                        players.Add(SpawnPlayer(i, j, Start3Player));
+                        break;
+                    case TileTypes.Start4:
+                        players.Add(SpawnPlayer(i, j, Start4Player));
                         break;
                 }
             }
@@ -120,38 +141,56 @@ public class BoardManager : MonoBehaviour
         return players;
     }
 
+    public Movement SpawnPlayer(int i, int j, GameObject prefab)
+    {
+        Vector3 pos = new Vector3(i, j, 1);
+        GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
+        return obj.GetComponent<Movement>();
+    }
+
     private GameObject RandomTile(TileTypes type)
     {
         switch(type)
         {
             case TileTypes.Ground:
-                return GroundTiles[Random.Range(0, GroundTiles.Length)];
+                return ArrayToRandomTile(GroundTiles);
             case TileTypes.Wall:
-                return WallTiles[Random.Range(0, WallTiles.Length)];
-			case TileTypes.Ice:
-				return IceTiles[Random.Range(0, IceTiles.Length)];
-			case TileTypes.Pit:
-				return PitTiles[Random.Range(0, PitTiles.Length)];
-			case TileTypes.Teleport1:
-				return Teleport1Tiles[Random.Range(0, Teleport1Tiles.Length)];
-			case TileTypes.Teleport2:
-				return Teleport2Tiles[Random.Range(0, Teleport2Tiles.Length)];
-			case TileTypes.Gate:
-				return GateTiles[Random.Range(0, GateTiles.Length)];
-			case TileTypes.Switch:
-				return SwitchTiles[Random.Range(0, SwitchTiles.Length)];
-			case TileTypes.Start1:
-				return Start1Tiles[Random.Range(0, Start1Tiles.Length)];
+                return ArrayToRandomTile(WallTiles);
+            case TileTypes.Ice:
+				return ArrayToRandomTile(IceTiles);
+            case TileTypes.Pit:
+				return ArrayToRandomTile(PitTiles);
+            case TileTypes.Teleport1:
+				return ArrayToRandomTile(Teleport1Tiles);
+            case TileTypes.Teleport2:
+				return ArrayToRandomTile(Teleport2Tiles);
+            case TileTypes.Teleport3:
+                return ArrayToRandomTile(Teleport3Tiles);
+            case TileTypes.Teleport4:
+                return ArrayToRandomTile(Teleport4Tiles);
+            case TileTypes.Gate:
+                return ArrayToRandomTile(GateTiles);
+            case TileTypes.Switch:
+                return ArrayToRandomTile(SwitchTiles);
+            case TileTypes.Start1:
+                return ArrayToRandomTile(Start1Tiles);
             case TileTypes.Start2:
-                return Start2Tiles[Random.Range(0, Start2Tiles.Length)];
-            case TileTypes.StartSlide:
-                return StartSlideTiles[Random.Range(0, StartSlideTiles.Length)];
+                return ArrayToRandomTile(Start2Tiles);
+            case TileTypes.Start3:
+                return ArrayToRandomTile(Start3Tiles);
+            case TileTypes.Start4:
+                return ArrayToRandomTile(Start4Tiles);
             case TileTypes.Goal:
-				return GoalTiles[Random.Range(0, GoalTiles.Length)];
-			default:
+                return ArrayToRandomTile(GoalTiles);
+            default:
 		        return ErrorTile;
         }
     }
+
+    public GameObject ArrayToRandomTile(GameObject[] array)
+    {
+        return array[Random.Range(0, array.Length)];
+    } 
 
     public void RemoveBoard()
     {
@@ -159,13 +198,16 @@ public class BoardManager : MonoBehaviour
             Destroy(BoardObject);
     }
 
-    public void ClickedMapPoint(Vector2 point)
+    public void ClickedMapPoint(Vector2 point, bool left)
     {
         try
         {
             int x = Mathf.RoundToInt(point.x);
             int y = Mathf.RoundToInt(point.y);
-            Board.Tiles[x][y] = NextTileType(Board.Tiles[x][y]);
+            if(left)
+                Board.Tiles[x][y] = NextTileType(Board.Tiles[x][y]);
+            else
+                Board.Tiles[x][y] = AlternateTileType(Board.Tiles[x][y]);
             RemoveBoard();
             SpawnBoard();
         }
@@ -186,23 +228,50 @@ public class BoardManager : MonoBehaviour
 			case TileTypes.Pit:
 				return TileTypes.Teleport1;
 			case TileTypes.Teleport1:
-				return TileTypes.Teleport2;
-			case TileTypes.Teleport2:
-				return TileTypes.Gate;
+            case TileTypes.Teleport2:
+            case TileTypes.Teleport3:
+            case TileTypes.Teleport4:
+                return TileTypes.Gate;
 			case TileTypes.Gate:
 				return TileTypes.Switch;
 			case TileTypes.Switch:
 				return TileTypes.Start1;
 			case TileTypes.Start1:
-                return TileTypes.Start2;
             case TileTypes.Start2:
-                return TileTypes.StartSlide;
-            case TileTypes.StartSlide:
+            case TileTypes.Start3:
+            case TileTypes.Start4:
                 return TileTypes.Goal;
 			case TileTypes.Goal:
 				return TileTypes.Ground;
             default:
-                return TileTypes.Ground;
+                return type;
+        }
+    }
+
+    public TileTypes AlternateTileType(TileTypes type)
+    {
+        switch(type)
+        {
+            // Starts
+            case TileTypes.Start1:
+                return TileTypes.Start2;
+            case TileTypes.Start2:
+                return TileTypes.Start3;
+            case TileTypes.Start3:
+                return TileTypes.Start4;
+            case TileTypes.Start4:
+                return TileTypes.Start1;
+            // Teleports
+            case TileTypes.Teleport1:
+                return TileTypes.Teleport2;
+            case TileTypes.Teleport2:
+                return TileTypes.Teleport3;
+            case TileTypes.Teleport3:
+                return TileTypes.Teleport4;
+            case TileTypes.Teleport4:
+                return TileTypes.Teleport1;
+            default:
+                return type;
         }
     }
 
@@ -223,7 +292,9 @@ public class BoardManager : MonoBehaviour
         if(GameManager.Instance.State == GameState.LevelBuilding)
         {
             if (Input.GetMouseButtonDown(0))
-                ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), true);
+            if (Input.GetMouseButtonDown(1))
+                ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), false);
             // TODO Right click Level Builder
         }
 

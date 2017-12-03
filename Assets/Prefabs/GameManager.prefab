@@ -81,6 +81,10 @@ MonoBehaviour:
   - {fileID: 1593088250925116, guid: fa64cd6d84d474f4eb2a9ec479fd58d6, type: 2}
   Teleport2Tiles:
   - {fileID: 1085697524965890, guid: b9a41e6600b07ce48ab432608fe452b9, type: 2}
+  Teleport3Tiles:
+  - {fileID: 1858494763599862, guid: af61e518df06b6e45bf9c16bc2bd0190, type: 2}
+  Teleport4Tiles:
+  - {fileID: 1202176004866310, guid: 8f5f91cc36cd04b45b213b6007b73920, type: 2}
   GateTiles:
   - {fileID: 1086905685740732, guid: f404fb77222bdfc47bdfd8d15a15e78f, type: 2}
   SwitchTiles:
@@ -89,6 +93,19 @@ MonoBehaviour:
   - {fileID: 1500469662035334, guid: 49d4ccc6bc21030499d35b9958b308de, type: 2}
   Start1Tiles:
   - {fileID: 1578457052537562, guid: ee070e0a892011748827754316127241, type: 2}
+  Start2Tiles:
+  - {fileID: 1406652263682302, guid: a6851814817104840aa2f9c54b87d92c, type: 2}
+  Start3Tiles:
+  - {fileID: 1964501461364248, guid: d9f5f0547e09ad241af1941d9cc7130b, type: 2}
+  Start4Tiles:
+  - {fileID: 1099114132708406, guid: 5052299e2fd309e48b783bdcae97b071, type: 2}
   GoalTiles:
   - {fileID: 1499553719346330, guid: 6999a071ae0c3f444a186d90d116610b, type: 2}
-  ErrorTile: {fileID: 0}
+  ErrorTile: {fileID: 1278786930758198, guid: 0abefc9fdaa3a4948b440a34702b03cf, type: 2}
+  Start1Player: {fileID: 1561546754648298, guid: bcdb7c419affecb4f8641ec98216a685,
+    type: 2}
+  Start2Player: {fileID: 1623710139538138, guid: 681b2b78701c6ba41bfc13bbae4384a2,
+    type: 2}
+  Start3Player: {fileID: 1184167681432060, guid: 8b629e350a2b3624180b37b01458af70,
+    type: 2}
+  Start4Player: {fileID: 0}
