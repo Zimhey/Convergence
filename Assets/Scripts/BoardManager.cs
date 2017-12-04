@@ -39,6 +39,8 @@ public class InvalidTileException : System.Exception
 [System.Serializable]
 public struct BoardInfo
 {
+    public string Name;
+    public string Description;
     public int Rows;
     public int Columns;
 
@@ -77,14 +79,29 @@ public class BoardManager : MonoBehaviour
     public GameObject Start4Player;
 
 
-    private void Resize()
+    public void Resize(int rows, int columns)
     {
+        BoardInfo old = Board;
+
+        Board.Rows = rows;
+        Board.Columns = columns;
+
         Board.Tiles = new TileTypes[Board.Rows][];
 
-        for(int i = 0; i < Board.Columns; i++)
+        for(int i = 0; i < Board.Rows; i++)
         {
             Board.Tiles[i] = new TileTypes[Board.Columns];
         }
+
+        if(old.Tiles != null)
+            for(int i = 0; i < Mathf.Min(Board.Rows, old.Rows); i++)
+            {
+                for(int j = 0; j < Mathf.Min(Board.Columns, old.Columns); j++)
+                {
+                    Board.Tiles[i][j] = old.Tiles[i][j];
+                }
+            }
+
     }
 
     public void SaveBoard(string name)
@@ -111,6 +128,11 @@ public class BoardManager : MonoBehaviour
     public void SpawnBoard()
     {
         RemoveBoard();
+
+        Camera mc = Camera.main;
+        mc.orthographicSize = Board.Columns / 2F;
+        mc.transform.position = new Vector3(Board.Rows / 2F - 0.5f, Board.Columns / 2F - 0.5f, -10);
+
         BoardObject = new GameObject("Board");
         for(int i = 0; i < Board.Rows; i++)
         {
@@ -315,7 +337,7 @@ public class BoardManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Resize();
+        Resize(10, 10);
         SpawnBoard();
     }
 

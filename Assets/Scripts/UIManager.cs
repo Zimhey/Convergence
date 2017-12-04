@@ -68,6 +68,7 @@ public class UIManager : MonoBehaviour
 
     public void SaveLevel()
     {
+        GameManager.Instance.BM.Board.Name = levelName;
         if(levelName != null)
             GameManager.Instance.BM.SaveBoard("Levels/" + levelName + ".xml");
     }
@@ -104,10 +105,39 @@ public class UIManager : MonoBehaviour
     {
         levelIndex = index;
     }
+
+    public void SetRows(string row)
+    {
+        int x;
+        bool isInt = int.TryParse(row, out x);
+        if(isInt)
+        {
+            GameManager.Instance.BM.Resize(x, GameManager.Instance.BM.Board.Columns);
+            GameManager.Instance.BM.SpawnBoard();
+        }
+    }
+
+    public void SetColumns(string column)
+    {
+        int x;
+        bool isInt = int.TryParse(column, out x);
+        if (isInt)
+        {
+            GameManager.Instance.BM.Resize(GameManager.Instance.BM.Board.Rows, x);
+            GameManager.Instance.BM.SpawnBoard();
+        }
+    }
+
     public void PlayClicked()
     {
         Debug.Log(GameManager.Instance.GetLevel(levelIndex));
         GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
+    }
+
+    public void DescriptionChanged(string description)
+    {
+        GameManager.Instance.BM.Board.Description = description;
+        Debug.Log(GameManager.Instance.BM.Board.Description);
     }
 
     public void RetryClicked()
