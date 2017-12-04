@@ -88,6 +88,7 @@ public class UIManager : MonoBehaviour
     {
         Screen = UserInterfaceScreens.MainMenu;
         GameManager.Instance.State = GameState.Menu;
+        GameManager.Instance.CleanLevel();
     }
 
     public void ShowLevelSelect()
@@ -99,6 +100,7 @@ public class UIManager : MonoBehaviour
     {
         Screen = UserInterfaceScreens.LevelBuilder;
         GameManager.Instance.State = GameState.LevelBuilding;
+        GameManager.Instance.BM.SpawnBoard();
     }
 
     public void setLevel(int index)
@@ -130,14 +132,19 @@ public class UIManager : MonoBehaviour
 
     public void PlayClicked()
     {
-        Debug.Log(GameManager.Instance.GetLevel(levelIndex));
+        GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
+    }
+
+    public void NextLevelClicked()
+    {
+        levelIndex++;
+        levelIndex %= GameManager.Instance.LevelList.Count;
         GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
     }
 
     public void DescriptionChanged(string description)
     {
         GameManager.Instance.BM.Board.Description = description;
-        Debug.Log(GameManager.Instance.BM.Board.Description);
     }
 
     public void RetryClicked()
@@ -145,19 +152,9 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.RetryLevel();
     }
 
-    public void ShowPause()
-    {
-        Screen = UserInterfaceScreens.Pause;
-    }
-
     public void Resume()
     {
-        HideAll();
-    }
-
-    public void HideAll()
-    {
-        Screen = UserInterfaceScreens.None;
+        GameManager.Instance.Resume();
     }
 
     public void QuitGame()

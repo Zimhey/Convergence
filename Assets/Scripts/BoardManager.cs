@@ -121,6 +121,7 @@ public class BoardManager : MonoBehaviour
         XmlReader reader = XmlReader.Create(fs);
 
         Board = (BoardInfo)ser.Deserialize(reader);
+        fs.Dispose();
         RemoveBoard();
         SpawnBoard();
     }
@@ -338,7 +339,6 @@ public class BoardManager : MonoBehaviour
     void Start()
     {
         Resize(10, 10);
-        SpawnBoard();
     }
 
     // Update is called once per frame

@@ -150,6 +150,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Resume()
+    {
+        // TODO pause game https://answers.unity.com/questions/904429/pause-and-resume-coroutine-1.html
+        State = stateBeforePause;
+        UIM.Screen = UserInterfaceScreens.None;
+    }
+
     public void PollForInput()
     {
         int horizontal = (int)(Input.GetAxisRaw("Horizontal"));

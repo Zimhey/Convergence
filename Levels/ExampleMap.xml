@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BoardInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>ExampleMap</Name>
+  <Description>An example map</Description>
   <Rows>10</Rows>
   <Columns>10</Columns>
   <Tiles>
@@ -24,7 +26,7 @@
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
-      <TileTypes>Pit</TileTypes>
+      <TileTypes>Teleport4</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
@@ -70,9 +72,9 @@
       <TileTypes>Switch</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ice</TileTypes>
-      <TileTypes>Pit</TileTypes>
+      <TileTypes>Teleport4</TileTypes>
       <TileTypes>Ice</TileTypes>
-      <TileTypes>Pit</TileTypes>
+      <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
@@ -107,7 +109,7 @@
       <TileTypes>Ice</TileTypes>
       <TileTypes>Ice</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Teleport2</TileTypes>
+      <TileTypes>Teleport1</TileTypes>
       <TileTypes>Pit</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
