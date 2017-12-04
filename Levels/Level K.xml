@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BoardInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Level K</Name>
   <Rows>10</Rows>
   <Columns>10</Columns>
   <Tiles>
@@ -19,45 +20,33 @@
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
+      <TileTypes>Goal</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+    </ArrayOfTileTypes>
+    <ArrayOfTileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>OpenGate</TileTypes>
+      <TileTypes>Ground</TileTypes>
       <TileTypes>Start3</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-    </ArrayOfTileTypes>
-    <ArrayOfTileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-    </ArrayOfTileTypes>
-    <ArrayOfTileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Start1</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
+      <TileTypes>Pit</TileTypes>
       <TileTypes>Ground</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
@@ -68,10 +57,10 @@
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Gate</TileTypes>
-      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
@@ -79,34 +68,46 @@
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+    </ArrayOfTileTypes>
+    <ArrayOfTileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+    </ArrayOfTileTypes>
+    <ArrayOfTileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Start2</TileTypes>
+      <TileTypes>Ground</TileTypes>
       <TileTypes>Switch</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-    </ArrayOfTileTypes>
-    <ArrayOfTileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
       <TileTypes>Gate</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
-      <TileTypes>Goal</TileTypes>
-      <TileTypes>Ground</TileTypes>
-      <TileTypes>Ground</TileTypes>
-      <TileTypes>Ground</TileTypes>
-      <TileTypes>Ground</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
+      <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Wall</TileTypes>
