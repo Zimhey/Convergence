@@ -40,7 +40,9 @@ public class IceMovePlayer : Movement {
 
         if (!canMove)
         {
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
             OnCantMove();
+            moving = true;
         }
 
        /* if (canMove)
@@ -66,10 +68,12 @@ public class IceMovePlayer : Movement {
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
 
-
         //Re-enable boxCollider after linecast
-
-        if (hit.transform == null)
+        if(!IsWithin((int)end.x, 0, GameManager.Instance.BM.Board.Rows - 1) || !IsWithin((int)end.y, 0, GameManager.Instance.BM.Board.Columns - 1)){
+            
+            return false;
+        }
+        else if (hit.transform == null)
         {
             while (hit.transform == null)
             {
@@ -86,7 +90,6 @@ public class IceMovePlayer : Movement {
                 hit = Physics2D.Linecast(start, end, BlockingLayer);
                 if (!IsWithin((int)end.x, 0, GameManager.Instance.BM.Board.Rows-1) || !IsWithin((int)end.y, 0, GameManager.Instance.BM.Board.Columns-1))
                 {
-                    Debug.Log("breaking");
                     break;
                 }
             }
