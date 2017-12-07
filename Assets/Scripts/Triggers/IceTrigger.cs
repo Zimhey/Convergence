@@ -52,5 +52,21 @@ public class IceTrigger : MonoBehaviour {
                 script.moveQueue.Enqueue(gameObject.transform.position + endAdjust);
             }
         }
+        else if(Character.tag == "InverseMove")
+        {
+            InverseMovePlayer script = Character.GetComponent<InverseMovePlayer>();
+
+            int xDir = script.getLastHoriz();
+            Debug.Log(xDir + " is x");
+            int yDir = script.getLastVert();
+            Debug.Log(yDir + " is y");
+
+            Vector3 endAdjust = new Vector2(xDir, yDir);
+
+            if (Physics2D.Linecast(gameObject.transform.position, gameObject.transform.position + endAdjust, script.BlockingLayer).transform == null)
+            {
+                script.moveQueue.Enqueue(gameObject.transform.position + endAdjust);
+            }
+        }
 	}
 }

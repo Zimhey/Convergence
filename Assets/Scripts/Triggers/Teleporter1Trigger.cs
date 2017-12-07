@@ -95,6 +95,19 @@ public class Teleporter1Trigger : MonoBehaviour {
             playerScript.AttemptMove(xDir, yDir);
 
         }
+        else if(player.tag == "InverseMove")
+        {
+            InverseMovePlayer playerScript = player.GetComponent<InverseMovePlayer>();
+            int xDir = playerScript.getLastHoriz();
+            int yDir = playerScript.getLastVert();
+            Vector3 newDestination = otherTeleport.gameObject.transform.position + new Vector3(xDir, yDir);
+
+            playerScript.StopCoroutine(playerScript.coroutine);
+            playerScript.gameObject.transform.SetPositionAndRotation(otherTeleport.transform.position, playerScript.gameObject.transform.rotation);
+            playerScript.moveQueue.Clear();
+            playerScript.moveQueue.Enqueue(newDestination);
+            playerScript.StartCoroutine(playerScript.SmoothMovement(playerScript.moveQueue.Dequeue()));
+        }
 
 		
 	}

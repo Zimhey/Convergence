@@ -12,6 +12,8 @@ TagManager:
   - DoubleMove
   - Tele3
   - Tele4
+  - Undefined
+  - InverseMove
   layers:
   - Default
   - TransparentFX

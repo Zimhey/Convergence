@@ -38,10 +38,16 @@ public class IceMovePlayer : Movement {
         
         bool canMove = Move(xDir, yDir, out hit);
 
-        if (canMove)
+        if (!canMove)
+        {
+            OnCantMove();
+        }
+
+       /* if (canMove)
         {
             AttemptMove(xDir, yDir);
         }
+        */
     }
 
     public override bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -112,8 +118,5 @@ public class IceMovePlayer : Movement {
 
     
 
-    protected override void OnCantMove()
-    {
-
-    }
+  
 }

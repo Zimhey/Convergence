@@ -38,9 +38,6 @@ public class SingleMovePlayer : Movement {
     }
 
 
-    protected override void OnCantMove()
-    {
-    
-    }
+   
 
 }

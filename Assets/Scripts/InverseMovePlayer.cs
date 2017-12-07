@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleMovePlayer : Movement {
+public class InverseMovePlayer : Movement {
 
+    // Use this for initialization
     //two variables to store the last inputed direction of the player
     int lastHoriz = 0;
     int lastVert = 0;
@@ -21,18 +22,17 @@ public class DoubleMovePlayer : Movement {
     }
 
 
-
     public override void AttemptMove(int xDir, int yDir)
     {
 
         //as long as there is player input for direction, store it
         if (xDir != 0 || yDir != 0)
         {
-            lastHoriz = xDir;
-            lastVert = yDir;
+            lastHoriz =  -xDir;
+            lastVert = -yDir;
         }
 
-        base.AttemptMove(2*xDir, 2*yDir);
+        base.AttemptMove(-xDir, -yDir);
 
         /*if (!moving) { 
           Move(xDir, yDir, out hit);
@@ -40,5 +40,5 @@ public class DoubleMovePlayer : Movement {
     }
 
 
-   
+    
 }

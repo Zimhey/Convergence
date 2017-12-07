@@ -93,8 +93,9 @@ public abstract class Movement : MonoBehaviour
         }
         else
         {
-            
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
             moving = false;
+            
         }
     }
 
@@ -120,7 +121,10 @@ public abstract class Movement : MonoBehaviour
 
         if (!canMove)
         {
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
             OnCantMove();
+            moving = true;
+            
         }
     }
 
@@ -129,7 +133,22 @@ public abstract class Movement : MonoBehaviour
 
     }
 
-    protected abstract void OnCantMove();
+    public void ShakeThatMovement()
+    {
+        Vector3 currentPosition = gameObject.transform.position;
+        Vector3 negShakePosition = new Vector3(currentPosition.x - 0.1f, currentPosition.y);
+        Vector3 posShakePosition = new Vector3(currentPosition.x + 0.1f, currentPosition.y);
+        moveQueue.Enqueue(negShakePosition);
+        moveQueue.Enqueue(posShakePosition);
+        moveQueue.Enqueue(negShakePosition);
+        moveQueue.Enqueue(currentPosition);
+        StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
+    }
+
+    public void OnCantMove()
+    {
+        ShakeThatMovement();
+    }
 
     // Update is called once per frame
     void Update()
