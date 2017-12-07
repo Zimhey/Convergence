@@ -84,6 +84,11 @@ public class IceMovePlayer : Movement {
                     end = start + new Vector2(xTrans, yTrans);
                 }
                 hit = Physics2D.Linecast(start, end, BlockingLayer);
+                if (!IsWithin((int)end.x, 0, GameManager.Instance.BM.Board.Rows-1) || !IsWithin((int)end.y, 0, GameManager.Instance.BM.Board.Columns-1))
+                {
+                    Debug.Log("breaking");
+                    break;
+                }
             }
 
             if (lastHoriz != 0)
@@ -114,6 +119,11 @@ public class IceMovePlayer : Movement {
 
         //If something was hit, return false, Move was unsuccesful.
         return false;
+    }
+
+    public static bool IsWithin(int val, int min, int max)
+    {
+        return (min <= val && val <= max);
     }
 
     
