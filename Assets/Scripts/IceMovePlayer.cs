@@ -5,8 +5,7 @@ using UnityEngine;
 public class IceMovePlayer : Movement {
 
     //two variables to store the last inputed direction of the player
-    int lastHoriz = 0;
-    int lastVert = 0;
+   
 
     //Returns last inputted x direction, will be zero if player inputted up or down
     public int getLastHoriz()

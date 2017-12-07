@@ -14,10 +14,14 @@ public abstract class Movement : MonoBehaviour
     public bool moving = false;
     public Queue<Vector3> moveQueue = new Queue<Vector3>();
     public Coroutine coroutine;
+    public int lastHoriz;
+    public int lastVert;
 
     // Use this for initialization
     protected virtual void Start()
     {
+        lastHoriz = 0;
+        lastVert = 0;
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
 
@@ -133,21 +137,30 @@ public abstract class Movement : MonoBehaviour
 
     }
 
-    public void ShakeThatMovement()
+    public void ShakeThatMovement(Vector3 adjustVector)
     {
         Vector3 currentPosition = gameObject.transform.position;
-        Vector3 negShakePosition = new Vector3(currentPosition.x - 0.1f, currentPosition.y);
-        Vector3 posShakePosition = new Vector3(currentPosition.x + 0.1f, currentPosition.y);
-        moveQueue.Enqueue(negShakePosition);
-        moveQueue.Enqueue(posShakePosition);
-        moveQueue.Enqueue(negShakePosition);
+        moveQueue.Enqueue(currentPosition - adjustVector);
+        moveQueue.Enqueue(currentPosition + adjustVector);
+        moveQueue.Enqueue(currentPosition - adjustVector);
         moveQueue.Enqueue(currentPosition);
         StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
     }
 
     public void OnCantMove()
     {
-        ShakeThatMovement();
+        
+        if(lastHoriz != 0)
+        {
+            Vector3 adjust = new Vector3(0.1f, 0);
+            ShakeThatMovement(adjust);
+        }
+        else if(lastVert != 0)
+        {
+            Vector3 adjust = new Vector3(0, 0.1f);
+            ShakeThatMovement(adjust);
+        }
+        
     }
 
     // Update is called once per frame
