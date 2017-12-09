@@ -126,4 +126,5 @@ MonoBehaviour:
     type: 2}
   Start3Player: {fileID: 1184167681432060, guid: 8b629e350a2b3624180b37b01458af70,
     type: 2}
-  Start4Player: {fileID: 0}
+  Start4Player: {fileID: 1679116937979962, guid: f81051a792dd0424a93343123a5751cd,
+    type: 2}

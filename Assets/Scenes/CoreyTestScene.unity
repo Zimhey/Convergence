@@ -156,6 +156,12 @@ Prefab:
       propertyPath: UIM
       value: 
       objectReference: {fileID: 2023104702}
+    - target: {fileID: 114538080914282194, guid: 0534a6d45ec8ac340b5cfbb5517207a2,
+        type: 2}
+      propertyPath: Start4Player
+      value: 
+      objectReference: {fileID: 1679116937979962, guid: f81051a792dd0424a93343123a5751cd,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0534a6d45ec8ac340b5cfbb5517207a2, type: 2}
   m_IsPrefabParent: 0
