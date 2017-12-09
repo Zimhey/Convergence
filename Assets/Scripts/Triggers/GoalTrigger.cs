@@ -22,8 +22,31 @@ public class GoalTrigger : MonoBehaviour {
 	int numChars;
 
 	void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.GetComponent<Movement>().shaking)
+        {
+            return;
+        }
+        switch (other.tag)
+        {
+            case "SingleMove":
+                SingleMovePlayer single = other.gameObject.GetComponent<SingleMovePlayer>();
+                single.GoalReached();
+                break;
+            case "DoubleMove":
+                DoubleMovePlayer duo = other.gameObject.GetComponent<DoubleMovePlayer>();
+                duo.GoalReached();
+                break;
+            case "IceMove":
+                IceMovePlayer ice = other.gameObject.GetComponent<IceMovePlayer>();
+                ice.GoalReached();
+                break;
+            case "InverseMove":
+                InverseMovePlayer inverse = other.gameObject.GetComponent<InverseMovePlayer>();
+                inverse.GoalReached();
+                break;
 
-        GameManager.Instance.GoalReached(other.gameObject);
+        }
+        
 		
 	}
 }

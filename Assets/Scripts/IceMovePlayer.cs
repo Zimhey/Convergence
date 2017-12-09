@@ -5,26 +5,27 @@ using UnityEngine;
 public class IceMovePlayer : Movement {
 
     //two variables to store the last inputed direction of the player
-    int lastHoriz = 0;
-    int lastVert = 0;
-
-    //Returns last inputted x direction, will be zero if player inputted up or down
-    public int getLastHoriz()
+    protected override void Start()
     {
-        return lastHoriz;
+        FindCorner();
+        base.Start();
     }
 
-    //Returns last inputted y direction, will be zero if player inputted left or right
-    public int getLastVert()
+    //two variables to store the last inputed direction of the player
+    public override void FindCorner()
     {
-        return lastVert;
-    }
+        Vector3 bottomRightScreen = new Vector3(Screen.width - 1, 1, 0);
+        bottomRightScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(bottomRightScreen);
+        bottomRightScreen = new Vector3((int)bottomRightScreen.x, (int)bottomRightScreen.y);
 
-    
+        corner = bottomRightScreen;
+        Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
+
+    }
 
     public override void AttemptMove(int xDir, int yDir)
     {
-
+        shaking = false;
         //as long as there is player input for direction, store it
         if (xDir != 0 || yDir != 0)
         {
@@ -38,10 +39,17 @@ public class IceMovePlayer : Movement {
         
         bool canMove = Move(xDir, yDir, out hit);
 
-        if (canMove)
+        if (!canMove)
+        {
+            OnCantMove();
+            moving = true;
+        }
+
+       /* if (canMove)
         {
             AttemptMove(xDir, yDir);
         }
+        */
     }
 
     public override bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -60,10 +68,12 @@ public class IceMovePlayer : Movement {
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
 
-
         //Re-enable boxCollider after linecast
-
-        if (hit.transform == null)
+        if(!IsWithin((int)end.x, 0, GameManager.Instance.BM.Board.Rows - 1) || !IsWithin((int)end.y, 0, GameManager.Instance.BM.Board.Columns - 1)){
+            
+            return false;
+        }
+        else if (hit.transform == null)
         {
             while (hit.transform == null)
             {
@@ -78,6 +88,10 @@ public class IceMovePlayer : Movement {
                     end = start + new Vector2(xTrans, yTrans);
                 }
                 hit = Physics2D.Linecast(start, end, BlockingLayer);
+                if (!IsWithin((int)end.x, 0, GameManager.Instance.BM.Board.Rows-1) || !IsWithin((int)end.y, 0, GameManager.Instance.BM.Board.Columns-1))
+                {
+                    break;
+                }
             }
 
             if (lastHoriz != 0)
@@ -110,10 +124,12 @@ public class IceMovePlayer : Movement {
         return false;
     }
 
+    public static bool IsWithin(int val, int min, int max)
+    {
+        return (min <= val && val <= max);
+    }
+
     
 
-    protected override void OnCantMove()
-    {
-
-    }
+  
 }

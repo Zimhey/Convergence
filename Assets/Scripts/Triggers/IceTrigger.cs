@@ -11,7 +11,10 @@ public class IceTrigger : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		Debug.Log ("Character has entered Ice trigger.");
-
+        if (other.gameObject.GetComponent<Movement>().shaking)
+        {
+            return;
+        }
         //stores current character object
         Character = other.gameObject;
 		Debug.Log (Character);
@@ -39,6 +42,22 @@ public class IceTrigger : MonoBehaviour {
         else if(Character.tag == "DoubleMove")
         {
             DoubleMovePlayer script = Character.GetComponent<DoubleMovePlayer>();
+
+            int xDir = script.getLastHoriz();
+            Debug.Log(xDir + " is x");
+            int yDir = script.getLastVert();
+            Debug.Log(yDir + " is y");
+
+            Vector3 endAdjust = new Vector2(xDir, yDir);
+
+            if (Physics2D.Linecast(gameObject.transform.position, gameObject.transform.position + endAdjust, script.BlockingLayer).transform == null)
+            {
+                script.moveQueue.Enqueue(gameObject.transform.position + endAdjust);
+            }
+        }
+        else if(Character.tag == "InverseMove")
+        {
+            InverseMovePlayer script = Character.GetComponent<InverseMovePlayer>();
 
             int xDir = script.getLastHoriz();
             Debug.Log(xDir + " is x");

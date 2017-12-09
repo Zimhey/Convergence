@@ -28,6 +28,11 @@ public class Teleporter1Trigger : MonoBehaviour {
 	//}
 
 	void OnTriggerEnter2D(Collider2D other) {
+
+        if (other.gameObject.GetComponent<Movement>().shaking)
+        {
+            return;
+        }
 		//Find the specific teleporter in the level
 		otherTeleports = GameObject.FindGameObjectsWithTag(gameObject.tag);
 
@@ -56,33 +61,8 @@ public class Teleporter1Trigger : MonoBehaviour {
         //Will need code to determine which boy enter the tele
         player = other.gameObject;
 
-        if(player.tag == "SingleMove")
-        {
-            SingleMovePlayer playerScript = player.GetComponent<SingleMovePlayer>();
-            int xDir = playerScript.getLastHoriz();
-            int yDir = playerScript.getLastVert();
-            Vector3 newDestination = otherTeleport.gameObject.transform.position + new Vector3(xDir, yDir);
-
-            playerScript.StopCoroutine(playerScript.coroutine);
-            playerScript.gameObject.transform.SetPositionAndRotation(otherTeleport.transform.position, playerScript.gameObject.transform.rotation);
-            playerScript.moveQueue.Clear();
-            playerScript.moveQueue.Enqueue(newDestination);
-            playerScript.StartCoroutine(playerScript.SmoothMovement(playerScript.moveQueue.Dequeue()));
-        }
-        else if(player.tag == "DoubleMove")
-        {
-            DoubleMovePlayer playerScript = player.GetComponent<DoubleMovePlayer>();
-            int xDir = playerScript.getLastHoriz();
-            int yDir = playerScript.getLastVert();
-            Vector3 newDestination = otherTeleport.gameObject.transform.position + new Vector3(xDir, yDir);
-
-            playerScript.StopCoroutine(playerScript.coroutine);
-            playerScript.gameObject.transform.SetPositionAndRotation(otherTeleport.transform.position, playerScript.gameObject.transform.rotation);
-            playerScript.moveQueue.Clear();
-            playerScript.moveQueue.Enqueue(newDestination);
-            playerScript.StartCoroutine(playerScript.SmoothMovement(playerScript.moveQueue.Dequeue()));
-        }
-        else if(player.tag == "IceMove")
+        
+        if(player.tag == "IceMove")
         {
             IceMovePlayer playerScript = player.GetComponent<IceMovePlayer>();
             int xDir = playerScript.getLastHoriz();
@@ -94,6 +74,26 @@ public class Teleporter1Trigger : MonoBehaviour {
             playerScript.moving = false;
             playerScript.AttemptMove(xDir, yDir);
 
+        }
+        else
+        {
+            Movement playerScript = player.GetComponent<Movement>();
+            int xDir = playerScript.getLastHoriz();
+            Debug.Log("xDir is" + xDir);
+            int yDir = playerScript.getLastVert();
+            Vector3 newDestination = otherTeleport.gameObject.transform.position + new Vector3(xDir, yDir);
+            RaycastHit2D hit = Physics2D.Linecast(otherTeleport.transform.position, newDestination, playerScript.BlockingLayer);
+            if (hit.transform != null)
+            {
+                Debug.Log("new Dest X: " + hit.transform.position.x + " new Dest Y: " + hit.transform.position.y);
+                newDestination = otherTeleport.transform.position;
+            }
+
+            playerScript.StopCoroutine(playerScript.coroutine);
+            playerScript.gameObject.transform.SetPositionAndRotation(otherTeleport.transform.position, playerScript.gameObject.transform.rotation);
+            playerScript.moveQueue.Clear();
+            playerScript.moveQueue.Enqueue(newDestination);
+            playerScript.StartCoroutine(playerScript.SmoothMovement(playerScript.moveQueue.Dequeue()));
         }
 
 		

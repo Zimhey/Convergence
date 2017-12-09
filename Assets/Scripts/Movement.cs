@@ -14,10 +14,16 @@ public abstract class Movement : MonoBehaviour
     public bool moving = false;
     public Queue<Vector3> moveQueue = new Queue<Vector3>();
     public Coroutine coroutine;
+    public int lastHoriz;
+    public int lastVert;
+    public Vector3 corner;
+    public bool shaking;
 
     // Use this for initialization
     protected virtual void Start()
     {
+        lastHoriz = 0;
+        lastVert = 0;
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
 
@@ -28,6 +34,11 @@ public abstract class Movement : MonoBehaviour
         inverseMoveTime = 1f / moveTime;
 
         
+    }
+
+    public virtual void FindCorner()
+    {
+        return;
     }
 
     public virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -93,13 +104,17 @@ public abstract class Movement : MonoBehaviour
         }
         else
         {
-            
             moving = false;
+            if(end == corner)
+            {
+                GameManager.Instance.GoalReached(gameObject);
+            }
         }
     }
 
     public virtual void AttemptMove(int xDir, int yDir)
     {
+        shaking = false;
         //Hit will store whatever our linecast hits when Move is called.
         RaycastHit2D hit;
 
@@ -120,6 +135,7 @@ public abstract class Movement : MonoBehaviour
 
         if (!canMove)
         {
+            moving = true;
             OnCantMove();
         }
     }
@@ -129,11 +145,54 @@ public abstract class Movement : MonoBehaviour
 
     }
 
-    protected abstract void OnCantMove();
+    public void ShakeThatMovement(Vector3 adjustVector)
+    {
+        shaking = true;
+        Vector3 currentPosition = gameObject.transform.position;
+        moveQueue.Enqueue(currentPosition - adjustVector);
+        moveQueue.Enqueue(currentPosition + adjustVector);
+        moveQueue.Enqueue(currentPosition - adjustVector);
+        moveQueue.Enqueue(currentPosition);
+        StartCoroutine(SmoothMovement(moveQueue.Dequeue()));
+    }
+
+    public void OnCantMove()
+    {
+        
+        if(lastHoriz != 0)
+        {
+            Vector3 adjust = new Vector3(0.1f, 0);
+            ShakeThatMovement(adjust);
+        }
+        else if(lastVert != 0)
+        {
+            Vector3 adjust = new Vector3(0, 0.1f);
+            ShakeThatMovement(adjust);
+        }
+        
+    }
+
+    public void GoalReached()
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        moveQueue.Enqueue(corner);
+    }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    //Returns last inputted x direction, will be zero if player inputted up or down
+    public int getLastHoriz()
+    {
+        return lastHoriz;
+    }
+
+    //Returns last inputted y direction, will be zero if player inputted left or right
+    public int getLastVert()
+    {
+        return lastVert;
     }
 }

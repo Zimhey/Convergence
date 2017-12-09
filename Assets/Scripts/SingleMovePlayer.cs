@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class SingleMovePlayer : Movement {
 
-	//two variables to store the last inputed direction of the player
-	int lastHoriz = 0;
-	int lastVert = 0;
+    protected override void Start()
+    {
+        FindCorner();
+        base.Start();
+    }
 
-	//Returns last inputted x direction, will be zero if player inputted up or down
-	public int getLastHoriz() 
-	{
-		return lastHoriz;
-	}
+    //two variables to store the last inputed direction of the player
+    public override void FindCorner()
+    {
+        Vector3 upperRightScreen = new Vector3(Screen.width - 1, Screen.height -1, 0);
+        upperRightScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(upperRightScreen);
+        upperRightScreen = new Vector3((int)upperRightScreen.x, (int)upperRightScreen.y);
 
-	//Returns last inputted y direction, will be zero if player inputted left or right
-	public int getLastVert()
-	{
-		return lastVert;
-	}
+        corner = upperRightScreen;
+        Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
+        
+    }
+
+    
 
 
     public override void AttemptMove(int xDir, int yDir)
@@ -38,9 +42,6 @@ public class SingleMovePlayer : Movement {
     }
 
 
-    protected override void OnCantMove()
-    {
-    
-    }
+   
 
 }

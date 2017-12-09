@@ -12,6 +12,8 @@ TagManager:
   - DoubleMove
   - Tele3
   - Tele4
+  - Undefined
+  - InverseMove
   layers:
   - Default
   - TransparentFX
@@ -54,4 +56,7 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 158170835
+    locked: 0
+  - name: Player
+    uniqueID: 3293916623
     locked: 0
