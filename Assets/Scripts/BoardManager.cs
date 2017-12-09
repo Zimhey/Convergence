@@ -79,6 +79,15 @@ public class BoardManager : MonoBehaviour
     public GameObject Start4Player;
 
 
+    public void ResetBoard()
+    {
+        for(int i = 0; i < Board.Rows; i++)
+        {
+            for (int j = 0; j < Board.Columns; j++)
+                Board.Tiles[i][j] = TileTypes.Ground;
+        }
+    }
+
     public void Resize(int rows, int columns)
     {
         BoardInfo old = Board;
@@ -350,7 +359,6 @@ public class BoardManager : MonoBehaviour
                 ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), true);
             if (Input.GetMouseButtonDown(1))
                 ClickedMapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), false);
-            // TODO Right click Level Builder
         }
 
     }

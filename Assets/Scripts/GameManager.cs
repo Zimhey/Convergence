@@ -14,6 +14,7 @@ public enum GameState
 }
 
 [RequireComponent(typeof(BoardManager))]
+[RequireComponent(typeof(StoryLevels))]
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
     }
 
     public UIManager UIM;
+    [HideInInspector]
+    public StoryLevels Story;
     [HideInInspector]
     public BoardManager BM;
     [HideInInspector]
@@ -58,18 +61,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private bool levelListInitialized = false;
-    private Dictionary<string, string> levelList;
-    public Dictionary<string, string> LevelList
-    {
-        get
-        {
-            if (!levelListInitialized)
-                initLevelList();
-            return levelList;
-        }
-    }
-
     // Use this for initialization
     void Start()
     {
@@ -77,6 +68,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             BM = GetComponent<BoardManager>();
+            Story = GetComponent<StoryLevels>();
+            Story.Unlocked = Story.Levels.Count;
             State = GameState.Menu;
         }
         else
@@ -105,7 +98,7 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(string name)
     {
         customLevel = false;
-        BM.LoadBoard(name);
+        BM.LoadBoard("Levels/Story/" + name + ".xml"); // TODO handle Story in load level
         SetupBoard();
         UIM.Screen = UserInterfaceScreens.None;
     }
@@ -113,7 +106,7 @@ public class GameManager : MonoBehaviour
     public void LoadCustomLevel(string name)
     {
         customLevel = true;
-        BM.LoadBoard(name);
+        BM.LoadBoard("Levels/Custom/" + name + ".xml");
         SetupBoard();
         UIM.Screen = UserInterfaceScreens.None;
     }
@@ -193,10 +186,14 @@ public class GameManager : MonoBehaviour
             CleanLevel();
             State = GameState.Menu;
 
-            if (customLevel)
+            if (customLevel || !GameManager.Instance.Story.IsLevelUnlocked(UIM.levelIndex + 1)) // TODO move levelIndex into GM
                 UIM.Screen = UserInterfaceScreens.WinCustom;
             else
+            {
                 UIM.Screen = UserInterfaceScreens.Win;
+                Story.BeatLevel(UIM.levelIndex); // TODO test this
+            }
+
         }
     }
 
@@ -216,31 +213,5 @@ public class GameManager : MonoBehaviour
         if (PlayerRoot != null)
             Destroy(PlayerRoot);
         BM.RemoveBoard();
-    }
-
-    public string GetLevel(int index)
-    {
-        return LevelList[GetLevelList()[index]]; // translate the index to a key and use to get level path
-    }
-
-    public List<string> GetLevelList()
-    {
-        return new List<string>(LevelList.Keys);
-    }
-
-    private void initLevelList()
-    {
-        levelList = new Dictionary<string, string>();
-        //levelList.Add("Example Scene", "Scenes/Levels/ExampleScene");
-        // TODO add more levels
-
-        // TODO make a custom levels list
-        foreach (string file in System.IO.Directory.GetFiles("Levels/"))
-        {
-            string name = file.Replace("Levels/", "");
-            name = name.Replace(".xml", "");
-            levelList.Add(name, file);
-        }
-        levelListInitialized = true;
     }
 }

@@ -6,6 +6,7 @@ public enum UserInterfaceScreens
 {
     MainMenu,
     LevelSelect,
+    CustomLevelSelect,
     Loading,
     Pause,
     Win,
@@ -35,8 +36,10 @@ public class UIManager : MonoBehaviour
     }
 
     public GameObject MainMenuPanel;
-    public GameObject LevelSelectPanel;
-    public GameObject LevelDropDown;
+    public GameObject PlayPanel;
+    public UnityEngine.UI.Dropdown PlayLevelDropDown;
+    public GameObject CustomLevelPanel;
+    public UnityEngine.UI.Dropdown CustomLevelDropDown;
     public GameObject LoadingPanel;
     public GameObject PausePanel;
     public GameObject WinPanel;
@@ -44,18 +47,13 @@ public class UIManager : MonoBehaviour
     public GameObject LosePanel;
     public GameObject LevelBuilderPanel;
 
-    private int levelIndex;
-    private string levelName;
+    public int levelIndex;
+
+    private List<string> customLevels;
+    private int customLevelIndex;
 
     // Use this for initialization
     void Start () {
-         // Add Levels
-        UnityEngine.UI.Dropdown dropDownBox = LevelDropDown.GetComponent<UnityEngine.UI.Dropdown>();
-        dropDownBox.ClearOptions();
-        dropDownBox.AddOptions(GameManager.Instance.GetLevelList());
-        dropDownBox.RefreshShownValue(); 
-        levelIndex = 0;
-
         screen = StartScreen;
         setPanel(screen, true);
 
@@ -66,17 +64,21 @@ public class UIManager : MonoBehaviour
 		
 	}
 
+    // Builder
+
+    private string levelName;
+
     public void SaveLevel()
     {
         GameManager.Instance.BM.Board.Name = levelName;
         if(levelName != null)
-            GameManager.Instance.BM.SaveBoard("Levels/" + levelName + ".xml");
+            GameManager.Instance.BM.SaveBoard("Levels/Custom/" + levelName + ".xml");
     }
 
     public void LoadLevel()
     {
         if (levelName != null)
-            GameManager.Instance.BM.LoadBoard("Levels/" + levelName + ".xml");
+            GameManager.Instance.BM.LoadBoard("Levels/Custom/" + levelName + ".xml");
     }
 
     public void SetBuilderLevelName(string name)
@@ -96,16 +98,28 @@ public class UIManager : MonoBehaviour
         Screen = UserInterfaceScreens.LevelSelect;
     }
 
+    public void ShowCustomSelect()
+    {
+        Screen = UserInterfaceScreens.CustomLevelSelect;
+    }
+
     public void ShowLevelBuilder()
     {
         Screen = UserInterfaceScreens.LevelBuilder;
         GameManager.Instance.State = GameState.LevelBuilding;
+        GameManager.Instance.BM.Resize(10, 10);
+        GameManager.Instance.BM.ResetBoard();
         GameManager.Instance.BM.SpawnBoard();
     }
 
-    public void setLevel(int index)
+    public void SetStoryLevelIndex(int index)
     {
         levelIndex = index;
+    }
+
+    public void SetCustomLevelIndex(int index)
+    {
+        customLevelIndex = index;
     }
 
     public void SetRows(string row)
@@ -130,16 +144,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void PlayClicked()
+    public void StoryPlayClicked()
     {
-        GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
+       GameManager.Instance.LoadLevel(GameManager.Instance.Story.Levels[levelIndex]);
+    }
+
+    public void CustomPlayClicked()
+    {
+        GameManager.Instance.LoadCustomLevel(customLevels[customLevelIndex]);
     }
 
     public void NextLevelClicked()
     {
-        levelIndex++;
-        levelIndex %= GameManager.Instance.LevelList.Count;
-        GameManager.Instance.LoadLevel(GameManager.Instance.GetLevel(levelIndex));
+        if(GameManager.Instance.Story.IsLevelUnlocked(levelIndex + 1))
+            GameManager.Instance.LoadLevel(GameManager.Instance.Story.Levels[++levelIndex]);
     }
 
     public void DescriptionChanged(string description)
@@ -166,6 +184,30 @@ public class UIManager : MonoBehaviour
 #endif
     }
 
+    public void UpdateStoryLevelDropdown()
+    {
+        // Add Levels
+        PlayLevelDropDown.ClearOptions();
+        PlayLevelDropDown.AddOptions(GameManager.Instance.Story.GetAvailableLevels());
+        PlayLevelDropDown.RefreshShownValue();
+    }
+
+    public void UpdateCustomLevelDropdown()
+    {
+        customLevels = new List<string>();
+        foreach (string file in System.IO.Directory.GetFiles("Levels/Custom/"))
+        {
+            string name = file.Replace("Levels/Custom/", "");
+            name = name.Replace(".xml", "");
+            customLevels.Add(name);
+        }
+
+        // Add Levels
+        CustomLevelDropDown.ClearOptions();
+        CustomLevelDropDown.AddOptions(customLevels);
+        CustomLevelDropDown.RefreshShownValue();
+    }
+
     private void setPanel(UserInterfaceScreens panel, bool active)
     {
         switch(panel)
@@ -174,7 +216,14 @@ public class UIManager : MonoBehaviour
                 MainMenuPanel.SetActive(active);
                 break;
             case UserInterfaceScreens.LevelSelect:
-                LevelSelectPanel.SetActive(active);
+                if (active)
+                    UpdateStoryLevelDropdown();
+                PlayPanel.SetActive(active);
+                break;
+            case UserInterfaceScreens.CustomLevelSelect:
+                if (active)
+                    UpdateCustomLevelDropdown();
+                CustomLevelPanel.SetActive(active);
                 break;
             case UserInterfaceScreens.Loading:
                 LoadingPanel.SetActive(active);
