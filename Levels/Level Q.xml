@@ -72,7 +72,7 @@
       <TileTypes>Pit</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Gate</TileTypes>
-      <TileTypes>OpenGate</TileTypes>
+      <TileTypes>Ground</TileTypes>
       <TileTypes>Ground</TileTypes>
       <TileTypes>Gate</TileTypes>
       <TileTypes>Wall</TileTypes>
@@ -97,7 +97,7 @@
       <TileTypes>Ground</TileTypes>
       <TileTypes>Gate</TileTypes>
       <TileTypes>OpenGate</TileTypes>
-      <TileTypes>OpenGate</TileTypes>
+      <TileTypes>Gate</TileTypes>
       <TileTypes>OpenGate</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
