@@ -107,6 +107,9 @@ MonoBehaviour:
   rb2D: {fileID: 0}
   inverseMoveTime: 0
   moving: 0
+  lastHoriz: 0
+  lastVert: 0
+  corner: {x: 0, y: 0, z: 0}
 --- !u!212 &212961524583250654
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -138,8 +141,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 158170835
-  m_SortingLayer: 2
+  m_SortingLayerID: -1001050673
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.6965513, g: 0, b: 1, a: 1}

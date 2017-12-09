@@ -16,6 +16,8 @@ public abstract class Movement : MonoBehaviour
     public Coroutine coroutine;
     public int lastHoriz;
     public int lastVert;
+    public Vector3 corner;
+    public bool shaking;
 
     // Use this for initialization
     protected virtual void Start()
@@ -32,6 +34,11 @@ public abstract class Movement : MonoBehaviour
         inverseMoveTime = 1f / moveTime;
 
         
+    }
+
+    public virtual void FindCorner()
+    {
+        return;
     }
 
     public virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -97,14 +104,17 @@ public abstract class Movement : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = true;
             moving = false;
-            
+            if(end == corner)
+            {
+                GameManager.Instance.GoalReached(gameObject);
+            }
         }
     }
 
     public virtual void AttemptMove(int xDir, int yDir)
     {
+        shaking = false;
         //Hit will store whatever our linecast hits when Move is called.
         RaycastHit2D hit;
 
@@ -125,10 +135,8 @@ public abstract class Movement : MonoBehaviour
 
         if (!canMove)
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            OnCantMove();
             moving = true;
-            
+            OnCantMove();
         }
     }
 
@@ -139,6 +147,7 @@ public abstract class Movement : MonoBehaviour
 
     public void ShakeThatMovement(Vector3 adjustVector)
     {
+        shaking = true;
         Vector3 currentPosition = gameObject.transform.position;
         moveQueue.Enqueue(currentPosition - adjustVector);
         moveQueue.Enqueue(currentPosition + adjustVector);
@@ -163,9 +172,27 @@ public abstract class Movement : MonoBehaviour
         
     }
 
+    public void GoalReached()
+    {
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        moveQueue.Enqueue(corner);
+    }
+
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    //Returns last inputted x direction, will be zero if player inputted up or down
+    public int getLastHoriz()
+    {
+        return lastHoriz;
+    }
+
+    //Returns last inputted y direction, will be zero if player inputted left or right
+    public int getLastVert()
+    {
+        return lastVert;
     }
 }

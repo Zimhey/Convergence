@@ -11,7 +11,10 @@ public class IceTrigger : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		Debug.Log ("Character has entered Ice trigger.");
-
+        if (other.gameObject.GetComponent<Movement>().shaking)
+        {
+            return;
+        }
         //stores current character object
         Character = other.gameObject;
 		Debug.Log (Character);

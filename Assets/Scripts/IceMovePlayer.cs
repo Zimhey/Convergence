@@ -5,25 +5,27 @@ using UnityEngine;
 public class IceMovePlayer : Movement {
 
     //two variables to store the last inputed direction of the player
-   
-
-    //Returns last inputted x direction, will be zero if player inputted up or down
-    public int getLastHoriz()
+    protected override void Start()
     {
-        return lastHoriz;
+        FindCorner();
+        base.Start();
     }
 
-    //Returns last inputted y direction, will be zero if player inputted left or right
-    public int getLastVert()
+    //two variables to store the last inputed direction of the player
+    public override void FindCorner()
     {
-        return lastVert;
-    }
+        Vector3 bottomRightScreen = new Vector3(Screen.width - 1, 1, 0);
+        bottomRightScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(bottomRightScreen);
+        bottomRightScreen = new Vector3((int)bottomRightScreen.x, (int)bottomRightScreen.y);
 
-    
+        corner = bottomRightScreen;
+        Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
+
+    }
 
     public override void AttemptMove(int xDir, int yDir)
     {
-
+        shaking = false;
         //as long as there is player input for direction, store it
         if (xDir != 0 || yDir != 0)
         {
@@ -39,7 +41,6 @@ public class IceMovePlayer : Movement {
 
         if (!canMove)
         {
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
             OnCantMove();
             moving = true;
         }

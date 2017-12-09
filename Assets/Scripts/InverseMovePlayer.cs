@@ -6,21 +6,26 @@ public class InverseMovePlayer : Movement {
 
     // Use this for initialization
     //two variables to store the last inputed direction of the player
+    protected override void Start()
+    {
+        FindCorner();
+        base.Start();
+    }
+
+    //two variables to store the last inputed direction of the player
+    public override void FindCorner()
+    {
+        Vector3 bottomLeftScreen = new Vector3(1, 1, 0);
+        bottomLeftScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(bottomLeftScreen);
+        bottomLeftScreen = new Vector3((int)bottomLeftScreen.x, (int)bottomLeftScreen.y);
+
+        corner = bottomLeftScreen;
+        Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
+
+    }
+
     
-
-    //Returns last inputted x direction, will be zero if player inputted up or down
-    public int getLastHoriz()
-    {
-        return lastHoriz;
-    }
-
-    //Returns last inputted y direction, will be zero if player inputted left or right
-    public int getLastVert()
-    {
-        return lastVert;
-    }
-
-
+    
     public override void AttemptMove(int xDir, int yDir)
     {
 

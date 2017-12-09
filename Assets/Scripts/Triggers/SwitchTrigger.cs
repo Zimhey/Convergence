@@ -16,6 +16,10 @@ public class SwitchTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+        if (other.gameObject.GetComponent<Movement>().shaking)
+        {
+            return;
+        }
 		if (!entered) {
 			Debug.Log ("Character has entered switch trigger.");
 

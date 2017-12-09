@@ -5,18 +5,22 @@ using UnityEngine;
 public class DoubleMovePlayer : Movement {
 
     //two variables to store the last inputed direction of the player
-    
-
-    //Returns last inputted x direction, will be zero if player inputted up or down
-    public int getLastHoriz()
+    protected override void Start()
     {
-        return lastHoriz;
+        FindCorner();
+        base.Start();
     }
 
-    //Returns last inputted y direction, will be zero if player inputted left or right
-    public int getLastVert()
+    //two variables to store the last inputed direction of the player
+    public override void FindCorner()
     {
-        return lastVert;
+        Vector3 upperLeftScreen = new Vector3(1, Screen.height - 1, 0);
+        upperLeftScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(upperLeftScreen);
+        upperLeftScreen = new Vector3((int)upperLeftScreen.x, (int)upperLeftScreen.y);
+
+        corner = upperLeftScreen;
+        Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
+
     }
 
 

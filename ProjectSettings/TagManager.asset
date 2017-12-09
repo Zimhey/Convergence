@@ -57,3 +57,6 @@ TagManager:
   - name: Wall
     uniqueID: 158170835
     locked: 0
+  - name: Player
+    uniqueID: 3293916623
+    locked: 0
