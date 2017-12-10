@@ -16,19 +16,33 @@ public class StoryLevels : MonoBehaviour
         }
     }
 
-    private int unlocked;
-    public int DebugUnlocked;
     public int Unlocked
     {
         get
         {
-            return unlocked;
+            return Mathf.Max(1, PlayerPrefs.GetInt("Unlocked"));
         }
         set
         {
             if (value <= Levels.Count)
-                unlocked = value;
+                PlayerPrefs.SetInt("Unlocked", value);
         }
+    }
+
+    public GameObject[] StoryBeats;
+
+    public bool ResetProgress;
+
+    public void Start()
+    {
+        if (ResetProgress)
+            Unlocked = 1;
+    }
+
+    public void RefreshStoryBeats()
+    {
+        for (int i = 0; i < Mathf.Min(Levels.Count, StoryBeats.Length); i++)
+            StoryBeats[i].SetActive(i < Unlocked);
     }
 
     public List<string> GetAvailableLevels()
@@ -41,7 +55,7 @@ public class StoryLevels : MonoBehaviour
 
     public void BeatLevel(int i)
     {
-        if (Unlocked == i)
+        if (Unlocked == i + 1)
             Unlocked++;
     }
 

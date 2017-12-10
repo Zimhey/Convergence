@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
         }
         set
         {
+            GameManager.Instance.Story.RefreshStoryBeats();
             setPanel(screen, false);
             setPanel(value, true);
             screen = value;
@@ -46,7 +47,9 @@ public class UIManager : MonoBehaviour
     public GameObject WinCustomPanel;
     public GameObject LosePanel;
     public GameObject LevelBuilderPanel;
+    public GameObject LorePanel;
 
+    [HideInInspector]
     public int levelIndex;
 
     private List<string> customLevels;
@@ -54,9 +57,7 @@ public class UIManager : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        screen = StartScreen;
-        setPanel(screen, true);
-
+        Screen = StartScreen;
     }
 	
 	// Update is called once per frame
@@ -214,31 +215,39 @@ public class UIManager : MonoBehaviour
         {
             case UserInterfaceScreens.MainMenu:
                 MainMenuPanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.LevelSelect:
                 if (active)
                     UpdateStoryLevelDropdown();
                 PlayPanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.CustomLevelSelect:
                 if (active)
                     UpdateCustomLevelDropdown();
                 CustomLevelPanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.Loading:
                 LoadingPanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.Pause:
                 PausePanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.Win:
                 WinPanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.WinCustom:
                 WinCustomPanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.Lose:
                 LosePanel.SetActive(active);
+                LorePanel.SetActive(active);
                 break;
             case UserInterfaceScreens.LevelBuilder:
                 LevelBuilderPanel.SetActive(active);

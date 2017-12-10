@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
             instance = this;
             BM = GetComponent<BoardManager>();
             Story = GetComponent<StoryLevels>();
-            Story.Unlocked = Story.Levels.Count;
             State = GameState.Menu;
         }
         else
@@ -185,6 +184,8 @@ public class GameManager : MonoBehaviour
         {
             CleanLevel();
             State = GameState.Menu;
+
+            Story.BeatLevel(UIM.levelIndex);
 
             if (customLevel || !GameManager.Instance.Story.IsLevelUnlocked(UIM.levelIndex + 1)) // TODO move levelIndex into GM
                 UIM.Screen = UserInterfaceScreens.WinCustom;
