@@ -15,6 +15,7 @@ public enum GameState
 
 [RequireComponent(typeof(BoardManager))]
 [RequireComponent(typeof(StoryLevels))]
+[RequireComponent(typeof(UIManager))]
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
@@ -31,7 +32,8 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-
+    
+    [HideInInspector]
     public UIManager UIM;
     [HideInInspector]
     public StoryLevels Story;
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
             instance = this;
             BM = GetComponent<BoardManager>();
             Story = GetComponent<StoryLevels>();
+            UIM = GetComponent<UIManager>();
             State = GameState.Menu;
         }
         else
