@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BoardInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Level D</Name>
   <Rows>10</Rows>
   <Columns>10</Columns>
   <Tiles>
@@ -60,7 +61,7 @@
       <TileTypes>Ground</TileTypes>
       <TileTypes>Ground</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
       <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
@@ -72,8 +73,8 @@
       <TileTypes>Ground</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>
@@ -84,8 +85,8 @@
       <TileTypes>Pit</TileTypes>
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>
@@ -95,9 +96,9 @@
       <TileTypes>Wall</TileTypes>
       <TileTypes>Ground</TileTypes>
       <TileTypes>Wall</TileTypes>
+      <TileTypes>Pit</TileTypes>
+      <TileTypes>Pit</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>
@@ -108,8 +109,8 @@
       <TileTypes>Ground</TileTypes>
       <TileTypes>Ground</TileTypes>
       <TileTypes>Ground</TileTypes>
-      <TileTypes>Wall</TileTypes>
-      <TileTypes>Wall</TileTypes>
+      <TileTypes>Ground</TileTypes>
+      <TileTypes>Ground</TileTypes>
     </ArrayOfTileTypes>
     <ArrayOfTileTypes>
       <TileTypes>Wall</TileTypes>

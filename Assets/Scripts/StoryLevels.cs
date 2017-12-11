@@ -75,11 +75,13 @@ public class StoryLevels : MonoBehaviour
         levels.Add("Level D");
         levels.Add("Level E");
         levels.Add("Level F");
+        levels.Add("Level FG");
         levels.Add("Level G");
         levels.Add("Level H");
         levels.Add("Level I");
         levels.Add("Level J");
         levels.Add("Level K");
+        levels.Add("Level KL");
         levels.Add("Level L");
         levels.Add("Level M");
         levels.Add("Level N");
