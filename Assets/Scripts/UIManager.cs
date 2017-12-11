@@ -29,7 +29,8 @@ public class UIManager : MonoBehaviour
         }
         set
         {
-            GameManager.Instance.Story.RefreshStoryBeats();
+            if(GameManager.Instance.Story != null)
+                GameManager.Instance.Story.RefreshStoryBeats();
             setPanel(screen, false);
             setPanel(value, true);
             screen = value;

@@ -37,6 +37,7 @@ public class StoryLevels : MonoBehaviour
     {
         if (ResetProgress)
             Unlocked = 1;
+        RefreshStoryBeats();
     }
 
     public void RefreshStoryBeats()
