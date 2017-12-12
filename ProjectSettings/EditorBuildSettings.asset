@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/LevelBuilder-Backup.unity
-    guid: cf9026360d946d44e9b8b013b037515c
-  - enabled: 1
-    path: Assets/Scenes/Levels/ExampleScene.unity
-    guid: 83b31e8dcc8acf54ebff4b357ef17735
-  - enabled: 1
-    path: Assets/Scenes/LevelBuilder.unity
-    guid: d57858f98538ce8468d76c35c5c800f6
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 69a9334faf59e3549a8914955288cdd9
