@@ -36,10 +36,7 @@ public abstract class Movement : MonoBehaviour
         
     }
 
-    public virtual void FindCorner()
-    {
-        return;
-    }
+    public abstract void FindCorner(Vector3 goalLocation);
 
     public virtual bool Move(int xDir, int yDir, out RaycastHit2D hit)
     {
@@ -108,6 +105,7 @@ public abstract class Movement : MonoBehaviour
             moving = false;
             if(end == corner)
             {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
                 GameManager.Instance.GoalReached(gameObject);
             }
         }
@@ -173,9 +171,10 @@ public abstract class Movement : MonoBehaviour
         
     }
 
-    public void GoalReached()
+    public void GoalReached(Vector3 goalLocation)
     {
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        FindCorner(goalLocation);
         moveQueue.Enqueue(corner);
     }
 

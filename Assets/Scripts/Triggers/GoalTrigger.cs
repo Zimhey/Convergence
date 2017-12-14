@@ -26,7 +26,10 @@ public class GoalTrigger : MonoBehaviour {
         {
             return;
         }
-        switch (other.tag)
+
+        Movement script = other.gameObject.GetComponent<Movement>();
+        script.GoalReached(gameObject.transform.position);
+       /* switch (other.tag)
         {
             case "SingleMove":
                 SingleMovePlayer single = other.gameObject.GetComponent<SingleMovePlayer>();
@@ -46,6 +49,7 @@ public class GoalTrigger : MonoBehaviour {
                 break;
 
         }
+        */
         
 		
 	}

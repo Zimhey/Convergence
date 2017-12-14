@@ -7,18 +7,22 @@ public class IceMovePlayer : Movement {
     //two variables to store the last inputed direction of the player
     protected override void Start()
     {
-        FindCorner();
         base.Start();
     }
 
     //two variables to store the last inputed direction of the player
-    public override void FindCorner()
+    public override void FindCorner(Vector3 goalLocation)
     {
-        Vector3 bottomRightScreen = new Vector3(Screen.width - 1, 1, 0);
+        Vector3 offset = new Vector3(0.5f, -0.5f);
+        Vector3 bottomRightGoal = goalLocation + offset;
+        corner = bottomRightGoal;
+
+        /*Vector3 bottomRightScreen = new Vector3(Screen.width - 1, 1, 0);
         bottomRightScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(bottomRightScreen);
         bottomRightScreen = new Vector3((int)bottomRightScreen.x, (int)bottomRightScreen.y);
 
         corner = bottomRightScreen;
+        */
         Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
 
     }

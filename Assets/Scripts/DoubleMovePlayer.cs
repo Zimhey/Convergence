@@ -7,18 +7,17 @@ public class DoubleMovePlayer : Movement {
     //two variables to store the last inputed direction of the player
     protected override void Start()
     {
-        FindCorner();
+        
         base.Start();
     }
 
     //two variables to store the last inputed direction of the player
-    public override void FindCorner()
+    public override void FindCorner(Vector3 goalLocation)
     {
-        Vector3 upperLeftScreen = new Vector3(1, Screen.height - 1, 0);
-        upperLeftScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(upperLeftScreen);
-        upperLeftScreen = new Vector3((int)upperLeftScreen.x, (int)upperLeftScreen.y);
+        Vector3 offset = new Vector3(-0.5f, 0.5f);
+        Vector3 upperLeftGoal = goalLocation + offset;
+        corner = upperLeftGoal;
 
-        corner = upperLeftScreen;
         Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
 
     }

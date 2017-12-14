@@ -8,18 +8,22 @@ public class InverseMovePlayer : Movement {
     //two variables to store the last inputed direction of the player
     protected override void Start()
     {
-        FindCorner();
         base.Start();
     }
 
     //two variables to store the last inputed direction of the player
-    public override void FindCorner()
+    public override void FindCorner(Vector3 goalLocation)
     {
-        Vector3 bottomLeftScreen = new Vector3(1, 1, 0);
+        Vector3 offset = new Vector3(-0.5f, -0.5f);
+        Vector3 bottomLeftGoal = goalLocation + offset;
+        corner = bottomLeftGoal;
+
+        /*Vector3 bottomLeftScreen = new Vector3(1, 1, 0);
         bottomLeftScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(bottomLeftScreen);
         bottomLeftScreen = new Vector3((int)bottomLeftScreen.x, (int)bottomLeftScreen.y);
 
         corner = bottomLeftScreen;
+        */
         Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
 
     }

@@ -6,18 +6,16 @@ public class SingleMovePlayer : Movement {
 
     protected override void Start()
     {
-        FindCorner();
         base.Start();
     }
 
     //two variables to store the last inputed direction of the player
-    public override void FindCorner()
+    public override void FindCorner(Vector3 goalLocation)
     {
-        Vector3 upperRightScreen = new Vector3(Screen.width - 1, Screen.height -1, 0);
-        upperRightScreen = GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(upperRightScreen);
-        upperRightScreen = new Vector3((int)upperRightScreen.x, (int)upperRightScreen.y);
+        Vector3 offset = new Vector3(0.5f, 0.5f);
+        Vector3 upperRightGoal = goalLocation + offset;
+        corner = upperRightGoal;
 
-        corner = upperRightScreen;
         Debug.Log("corner x: " + corner.x + " corner y: " + corner.y);
         
     }
