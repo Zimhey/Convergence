@@ -212,14 +212,15 @@ public class GameManager : MonoBehaviour
             CleanLevel();
             State = GameState.Menu;
 
-            Story.BeatLevel(UIM.levelIndex);
+            Story.BeatLevel(UIM.levelIndex); // TODO FIX THIS could set story level then beat a custom game to advance story
 
             if (customLevel || !GameManager.Instance.Story.IsLevelUnlocked(UIM.levelIndex + 1)) // TODO move levelIndex into GM
                 UIM.Screen = UserInterfaceScreens.WinCustom;
             else
             {
-                UIM.Screen = UserInterfaceScreens.Win;
-                Story.BeatLevel(UIM.levelIndex); // TODO test this
+                Story.BeatLevel(UIM.levelIndex);
+                UIM.Screen = UserInterfaceScreens.Lore;
+                UIM.NextScreen = UserInterfaceScreens.Win;
             }
 
         }
