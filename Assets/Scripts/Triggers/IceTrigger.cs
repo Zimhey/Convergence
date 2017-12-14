@@ -18,6 +18,13 @@ public class IceTrigger : MonoBehaviour {
         //stores current character object
         Character = other.gameObject;
 		Debug.Log (Character);
+        AudioSource audio = Character.GetComponent<AudioSource>();
+        AudioClip clip = Character.GetComponent<Movement>().slide;
+        if (!audio.clip == clip || !audio.isPlaying)
+        {
+            audio.clip = clip;
+            audio.Play();
+        }
 
 		if (Character.tag == "SingleMove") {
 
@@ -72,4 +79,12 @@ public class IceTrigger : MonoBehaviour {
             }
         }
 	}
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        AudioSource audio = other.gameObject.GetComponent<AudioSource>();
+        audio.clip = other.gameObject.GetComponent<Movement>().move;
+        audio.Play();
+        
+    }
 }

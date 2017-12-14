@@ -18,6 +18,9 @@ public abstract class Movement : MonoBehaviour
     public int lastVert;
     public Vector3 corner;
     public bool shaking;
+    public AudioClip click;
+    public AudioClip slide;
+    public AudioClip move;
 
     // Use this for initialization
     protected virtual void Start()
@@ -103,8 +106,11 @@ public abstract class Movement : MonoBehaviour
         else
         {
             moving = false;
+            gameObject.GetComponent<AudioSource>().Stop();
             if(end == corner)
             {
+                gameObject.GetComponent<AudioSource>().clip = click;
+                gameObject.GetComponent<AudioSource>().Play();
                 gameObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
                 GameManager.Instance.GoalReached(gameObject);
             }
