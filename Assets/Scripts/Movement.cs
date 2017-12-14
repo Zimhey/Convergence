@@ -49,15 +49,16 @@ public abstract class Movement : MonoBehaviour
         // Calculate end position based on the direction parameters passed in when calling Move.
         Vector2 end = start + new Vector2(xDir, yDir);
 
-        //Disable the boxCollider so that linecast doesn't hit this object's own collider.
-        //boxCollider.enabled = false;
-
         //Cast a line from start point to end point checking collision on blockingLayer.
         hit = Physics2D.Linecast(start, end, BlockingLayer);
-        
+
+        if (!IsWithin((int)end.x, 0, GameManager.Instance.BM.Board.Rows - 1) || !IsWithin((int)end.y, 0, GameManager.Instance.BM.Board.Columns - 1))
+        {
+            return false;
+        }
 
         //Re-enable boxCollider after linecast
-       // boxCollider.enabled = true;
+        // boxCollider.enabled = true;
 
         //Check if anything was hit
         if (hit.transform == null  && !moving)
@@ -194,5 +195,10 @@ public abstract class Movement : MonoBehaviour
     public int getLastVert()
     {
         return lastVert;
+    }
+
+    public static bool IsWithin(int val, int min, int max)
+    {
+        return (min <= val && val <= max);
     }
 }

@@ -124,10 +124,7 @@ public class IceMovePlayer : Movement {
         return false;
     }
 
-    public static bool IsWithin(int val, int min, int max)
-    {
-        return (min <= val && val <= max);
-    }
+    
 
     
 
