@@ -51,6 +51,8 @@ public class Teleporter1Trigger : MonoBehaviour {
 			return;
 		}
 
+        gameObject.GetComponent<AudioSource>().Play();
+
 		//Indicate that this teleporter has been used, set flag
 		Taken = true;
 

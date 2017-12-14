@@ -23,6 +23,8 @@ public class SwitchTrigger : MonoBehaviour {
 		if (!entered) {
 			Debug.Log ("Character has entered switch trigger.");
 
+            gameObject.GetComponent<AudioSource>().Play();
+
 			//stores current gate tile objects
 			GateTiles = GameObject.FindGameObjectsWithTag ("Gate");
 

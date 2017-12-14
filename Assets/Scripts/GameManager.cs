@@ -18,6 +18,10 @@ public enum GameState
 [RequireComponent(typeof(UIManager))]
 public class GameManager : MonoBehaviour
 {
+    public AudioClip menuAudio;
+    public AudioClip levelAudio;
+    AudioSource audio;
+
     private static GameManager instance = null;
 
     public static GameManager Instance
@@ -72,7 +76,9 @@ public class GameManager : MonoBehaviour
             BM = GetComponent<BoardManager>();
             Story = GetComponent<StoryLevels>();
             UIM = GetComponent<UIManager>();
+            audio = gameObject.GetComponent<AudioSource>();
             State = GameState.Menu;
+            audio.clip = menuAudio;
         }
         else
         {
@@ -88,11 +94,29 @@ public class GameManager : MonoBehaviour
         switch (State)
         {
             case GameState.WaitForInput:
+                audio.clip = levelAudio;
+                if (!audio.isPlaying){
+                    audio.Play();
+                }
                 PollForInput();
                 PollForPause();
                 break;
             case GameState.WaitForMoveComplete:
                 PollForTurnEnd();
+                break;
+            case GameState.Menu:
+                audio.clip = menuAudio;
+                if (!audio.isPlaying)
+                {
+                    audio.Play();
+                }
+                break;
+            case GameState.LevelBuilding:
+                audio.clip = menuAudio;
+                if (!audio.isPlaying)
+                {
+                    audio.Play();
+                }
                 break;
         }
     }
